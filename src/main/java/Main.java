@@ -17,34 +17,44 @@ public class Main {
         String ans =  (scanner.next()).toUpperCase();
         scanner.nextLine();
 
+        //if the user chooses to encrypt a file
         if(ans.equals("E")){
             System.out.println("Welcome to the encryption");
 
+
+            //initializing the crypto service and the file handling objects  for the encryption
             CryptoService cryptoService = new CryptoService();
             FileHandlingEncryptor  fileHandler = new FileHandlingEncryptor();
 
+            //taking from the user the path to the file for the encryption and its data from the file
             Path path = fileHandler.getSourceFilePath(scanner);
             byte[] data = fileHandler.getFileData(path);
 
+            //initializing a random key and encrypting the data
             int key = cryptoService.createKey();
             byte[] encryptedData = cryptoService.encrypt(data , key);
 
+
+            //saving the encrypted data
             fileHandler.saveEncryptedData(encryptedData , path , key);
             
-        } else if (ans.equals("D")) {
+        }
+        //if the user chooses to decrypt a file
+        else if (ans.equals("D")) {
             System.out.println("Welcome to the decryption");
-            //for the file handling class
+            //initializing the crypto service and the file handling objects for the decryption
             CryptoService cryptoService = new CryptoService();
             FileHandlingDecryptor fileHandler = new FileHandlingDecryptor();
 
+            //taking from the user the path to the file for the decryption and its data from the file
             Path path = fileHandler.getSourceFilePath(scanner);
             byte[] data = fileHandler.getFileData(path);
 
-
+            //taking the random key generated in the encryption phase
             int key = fileHandler.getKey(path);
             byte[] decryptedData = cryptoService.decrypt(data , key);
 
-            //file handling decryption
+            //saving the decrypted data
             fileHandler.saveDecryptedData(decryptedData , path);
 
 
