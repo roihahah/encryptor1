@@ -42,3 +42,16 @@ SELECT students.id , students.first_name , students.last_name , AVG(scores.score
     ON scores.student_id = students.id
  WHERE students.first_name = 'דפנה'
  GROUP BY students.id , students.first_name , students.last_name;
+ 
+ --g
+ SELECT schools.name , students.first_name , students.last_name , exams.field , scores.score
+FROM RoyHadad_Students students
+JOIN RoyHadad_Schools schools
+    ON students.school_id = schools.id
+JOIN RoyHadad_Settlements settlements
+    ON settlements.id = schools.settlement_id
+JOIN RoyHadad_Scores scores
+    ON students.id = scores.student_id
+JOIN RoyHadad_Exams exams
+    ON exams.id = scores.exam_id
+WHERE settlements.area = 'צפון';
