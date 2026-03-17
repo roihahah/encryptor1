@@ -20,7 +20,7 @@ SELECT students.first_name , students.last_name
     ON schools.id = students.school_id
   JOIN RoyHadad_Settlements settlements
     ON settlements.id = schools.settlement_id
- WHERE schools.name = 'בית הספר הריאלי' AND settlements.settlement = 'חיפה';
+ WHERE schools.name = 'בית הספר הריאלי' AND settlements.name = 'חיפה';
 
 --d
 SELECT schools.id , schools.name
@@ -30,7 +30,7 @@ SELECT schools.id , schools.name
  WHERE settlements.area = 'מרכז';
 
 --e
-SELECT settlements.area, settlements.settlement , schools.name
+SELECT settlements.area, settlements.name , schools.name
   FROM RoyHadad_Schools schools
   JOIN RoyHadad_Settlements settlements
     ON settlements.id = schools.settlement_id;
