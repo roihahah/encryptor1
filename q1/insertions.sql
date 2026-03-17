@@ -1,10 +1,10 @@
 
 -- Settlements
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('באר שבע', 'דרום');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('תל אביב', 'מרכז');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('חיפה', 'צפון');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('אשדוד', 'דרום');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('ירושלים', 'מרכז');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('באר שבע', 'דרום');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('תל אביב', 'מרכז');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('חיפה', 'צפון');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('אשדוד', 'דרום');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('ירושלים', 'מרכז');
 
 -- Schools
 INSERT INTO RoyHadad_Schools (name, settlement_id) VALUES ('תיכון רמון', 1);
