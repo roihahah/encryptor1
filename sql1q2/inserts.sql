@@ -1,7 +1,7 @@
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('חיפה','צפון');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('תל אביב','מרכז');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('ראשון לציון','מרכז');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('באר שבע','דרום');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('חיפה','צפון');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('תל אביב','מרכז');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('ראשון לציון','מרכז');
+INSERT INTO RoyHadad_Settlements (name, area) VALUES ('באר שבע','דרום');
 
 INSERT INTO RoyHadad_Schools (name, settlement_id) VALUES ('בית הספר הריאלי',1);
 INSERT INTO RoyHadad_Schools (name, settlement_id) VALUES ('גימנסיה הרצליה',2);
