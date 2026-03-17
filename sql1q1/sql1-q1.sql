@@ -21,6 +21,6 @@ SELECT first_name || ' ' || last_name AS full_name
  WHERE last_name LIKE 'ב%';
 
 --e
-  SELECT first_name, last_name 
-    FROM RoyHadad_Students
-ORDER BY first_name, last_name ASC;
+SELECT first_name, last_name 
+  FROM RoyHadad_Students
+ ORDER BY first_name, last_name ASC;
