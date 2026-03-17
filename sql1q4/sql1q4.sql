@@ -16,7 +16,7 @@ UPDATE RoyHadad_Scores
  WHERE exam_id IN (
     SELECT id
       FROM RoyHadad_Exams
-     WHERE field = 'אנגלית'
+     WHERE field = 'מתמטיקה'
 );
 
 --d
