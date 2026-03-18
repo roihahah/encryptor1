@@ -34,12 +34,12 @@ CREATE SEQUENCE students_seq START WITH 1;
 
 CREATE SEQUENCE exams_seq START WITH 1;
 
-CREATE TABLE RoyHadad_Areas (
+CREATE TABLE Roy_Hadad_Areas (
     id          NUMBER PRIMARY KEY,
     name        VARCHAR2(255)
 );
 
-CREATE TABLE RoyHadad_Settlements (
+CREATE TABLE Roy_Hadad_Settlements (
     id          NUMBER PRIMARY KEY,
     name        VARCHAR(255) UNIQUE NOT NULL,
     area_id     NUMBER,
@@ -49,7 +49,7 @@ CREATE TABLE RoyHadad_Settlements (
         REFERENCES RoyHadad_Areas(id)
 );
 
-CREATE TABLE RoyHadad_Schools (
+CREATE TABLE Roy_Hadad_Schools (
     id              NUMBER PRIMARY KEY,
     name            VARCHAR2(255),
     settlement_id   NUMBER,
@@ -61,7 +61,7 @@ CREATE TABLE RoyHadad_Schools (
 
 
 
-CREATE TABLE RoyHadad_Students (
+CREATE TABLE Roy_Hadad_Students (
     id          NUMBER PRIMARY KEY,
     school_id   NUMBER,
     first_name  VARCHAR2(255),
@@ -72,7 +72,7 @@ CREATE TABLE RoyHadad_Students (
         REFERENCES RoyHadad_Schools(id)
 );
 
-CREATE TABLE RoyHadad_Exams (
+CREATE TABLE Roy_Hadad_Exams (
     id          NUMBER PRIMARY KEY,
     school_id   NUMBER,
     field       VARCHAR2(255),
@@ -84,7 +84,7 @@ CREATE TABLE RoyHadad_Exams (
         REFERENCES RoyHadad_Schools(id)
 );
 
-CREATE TABLE RoyHadad_Scores(
+CREATE TABLE Roy_Hadad_Scores(
     exam_id     NUMBER,
     student_id  NUMBER,
     score       NUMBER,

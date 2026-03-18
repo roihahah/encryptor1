@@ -2,25 +2,25 @@
 --1
 --a
 SELECT first_name, last_name 
-  FROM RoyHadad_Students;
+  FROM Roy_Hadad_Students;
 
 --b
 SELECT name 
-  FROM RoyHadad_Schools;
+  FROM Roy_Hadad_Schools;
 
 --c
 SELECT s.score, e.field 
-  FROM RoyHadad_Exams e
-  JOIN RoyHadad_Scores s
+  FROM Roy_Hadad_Exams e
+  JOIN Roy_Hadad_Scores s
     ON e.id = s.exam_id
  WHERE s.score > 55;
 
 --d
 SELECT first_name || ' ' || last_name AS full_name
-  FROM RoyHadad_Students
+  FROM Roy_Hadad_Students
  WHERE last_name LIKE 'ב%';
 
 --e
 SELECT first_name, last_name 
-  FROM RoyHadad_Students
+  FROM Roy_Hadad_Students
  ORDER BY first_name, last_name ASC;
