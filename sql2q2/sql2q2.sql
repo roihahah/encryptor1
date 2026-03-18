@@ -13,6 +13,8 @@ CREATE OR REPLACE PACKAGE BODY Roy_Hadad_city_updater AS
         UPDATE Roy_Hadad_Settlements
            SET status = 2
          WHERE status = 1;
+         
+         COMMIT;
     END Roy_Hadad_update_city;
 END Roy_Hadad_city_updater;
 
@@ -24,9 +26,9 @@ END;
 
 BEGIN
     DBMS_SCHEDULER.create_job(
-        job_name => 'ROYHADAD_JOB',
+        job_name => 'UPDATE_SETTLEMENT_STATUS_JOB',
         job_type => 'PLSQL_BLOCK',
-        job_action => 'BEGIN RoyHadad_city_updater.RoyHadad_update_city; END;',
+        job_action => 'BEGIN Roy_Hadad_city_updater.Roy_Hadad_update_city; END;',
         start_date => SYSTIMESTAMP,
         repeat_interval => 'FREQ=SECONDLY; INTERVAL=30',
         enabled => TRUE
