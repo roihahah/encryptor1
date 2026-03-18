@@ -27,13 +27,17 @@ SELECT schools.id, schools.name
   FROM Roy_Hadad_Schools schools
   JOIN Roy_Hadad_Settlements settlements
     ON schools.settlement_id = settlements.id
- WHERE settlements.area = 'מרכז';
+  JOIN Roy_Hadad_Areas areas
+    ON areas.id = settlements.area_id
+ WHERE areas.name = 'מרכז';
 
 --e
-SELECT settlements.area, settlements.name, schools.name
+SELECT areas.name, settlements.name, schools.name
   FROM Roy_Hadad_Schools schools
   JOIN Roy_Hadad_Settlements settlements
-    ON settlements.id = schools.settlement_id;
+    ON settlements.id = schools.settlement_id
+  JOIN Roy_Hadad_Areas areas
+    ON areas.id = settlements.area_id;
 
 --f
 SELECT students.id, students.first_name, students.last_name, AVG(scores.score) AS average_score
@@ -50,8 +54,10 @@ SELECT schools.name, students.first_name, students.last_name, exams.field, score
     ON students.school_id = schools.id
   JOIN Roy_Hadad_Settlements settlements
     ON settlements.id = schools.settlement_id
+  JOIN Roy_Hadad_Areas areas
+    ON areas.id = settlements.area_id
   JOIN Roy_Hadad_Scores scores
     ON students.id = scores.student_id
   JOIN Roy_Hadad_Exams exams
     ON exams.id = scores.exam_id
- WHERE settlements.area = 'צפון';
+ WHERE areas.name = 'צפון';
