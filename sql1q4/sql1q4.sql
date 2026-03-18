@@ -2,36 +2,38 @@
 --in the inserts file
 
 --b
-DELETE FROM RoyHadad_Scores
+DELETE FROM Roy_Hadad_Scores
  WHERE exam_id IN (
     SELECT id
-      FROM RoyHadad_Exams
+      FROM Roy_Hadad_Exams
      WHERE field = 'אנגלית'
   )
    AND score < 80;
 
 --c
-UPDATE RoyHadad_Scores
+UPDATE Roy_Hadad_Scores
    SET score = GREATEST(score -3 ,0)
  WHERE exam_id IN (
     SELECT id
-      FROM RoyHadad_Exams
+      FROM Roy_Hadad_Exams
      WHERE field = 'מתמטיקה'
 );
 
 --d
-UPDATE RoyHadad_Scores
+UPDATE Roy_Hadad_Scores
    SET score = LEAST(score +3 , 100)
  WHERE exam_id IN (
     SELECT id
-      FROM RoyHadad_Exams
+      FROM Roy_Hadad_Exams
      WHERE field = 'מתמטיקה'
 );
 
 --end
 CREATE OR REPLACE VIEW RoyHadad_north_schools AS
 SELECT school.id , school.name
-  FROM RoyHadad_Schools school
-  JOIN RoyHadad_Settlements settlements
+  FROM Roy_Hadad_Schools school
+  JOIN Roy_Hadad_Settlements settlements
     ON school.settlement_id = settlements.id
- WHERE settlements.area = 'צפון';
+  JOIN Roy_Hadad_Areas areas
+    ON areas.id = settlements.area_id
+ WHERE areas.name = 'צפון';
