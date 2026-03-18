@@ -1,12 +1,12 @@
 
 --1
 --a
-SELECT  first_name, last_name 
-  FROM  RoyHadad_Students;
+SELECT first_name, last_name 
+  FROM RoyHadad_Students;
 
 --b
-SELECT  name 
-FROM    RoyHadad_Schools;
+SELECT name 
+  FROM RoyHadad_Schools;
 
 --c
 SELECT s.score, e.field 
