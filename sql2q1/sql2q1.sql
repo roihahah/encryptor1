@@ -1,92 +1,95 @@
 
 --a
 ALTER TABLE RoyHadad_Schools
-ADD students_number NUMBER;
+  ADD total_students NUMBER;
 
 --b
-CREATE OR REPLACE TRIGGER after_student_insert
-AFTER INSERT ON RoyHadad_Students
-FOR EACH ROW
-BEGIN
-    UPDATE RoyHadad_Schools
-    SET students_number = NVL(students_number , 0) + 1
-    WHERE id = :NEW.school_id;
-END;
-/
-
-CREATE OR REPLACE TRIGGER after_student_delete
-AFTER DELETE ON RoyHadad_Students
-FOR EACH ROW
-BEGIN
-    UPDATE RoyHadad_Schools
-    SET students_number = NVL(students_number , 0) - 1
-    WHERE id = :OLD.school_id;
-END;
-/
-
-
-CREATE OR REPLACE TRIGGER after_student_update
-AFTER UPDATE ON RoyHadad_Students
-FOR EACH ROW
-BEGIN
-    IF :OLD.school_id != :NEW.school_id THEN
+CREATE OR REPLACE TRIGGER trg_students_maintain_school_count
+ AFTER INSERT OR DELETE OR UPDATE OF school_id ON RoyHadad_Students
+   FOR EACH ROW
+ BEGIN
+    IF INSERTING THEN
         UPDATE RoyHadad_Schools
-        SET students_number = NVL(students_number , 0) - 1
-        WHERE id = :OLD.school_id;
-        
-        UPDATE RoyHadad_Schools
-        SET students_number = NVL(students_number , 0) + 1
+        SET total_students = NVL(total_students , 0) + 1
         WHERE id = :NEW.school_id;
+    ELSIF DELETING THEN
+        UPDATE RoyHadad_Schools
+        SET total_students = NVL(total_students , 0) - 1
+        WHERE id = :OLD.school_id;
+    ELSIF UPDATING THEN
+        IF :OLD.school_id != :NEW.school_id THEN
+            UPDATE RoyHadad_Schools
+            SET total_students = NVL(total_students , 0) - 1
+            WHERE id = :OLD.school_id;
+            
+            UPDATE RoyHadad_Schools
+            SET total_students = NVL(total_students , 0) + 1
+            WHERE id = :NEW.school_id;
+        END IF;
     END IF;
 END;
 /
+    
 --c
 DELETE FROM RoyHadad_Exams;
 DELETE FROM RoyHadad_Students;
 DELETE FROM RoyHadad_Schools;
+DELETE FROM RoyHadad_Settlements;
+DELETE FROM RoyHadad_Areas;
 
 --d
-ALTER TABLE RoyHadad_Schools
-MODIFY students_number NUMBER DEFAULT 0;
+ ALTER TABLE RoyHadad_Schools
+MODIFY total_students NUMBER DEFAULT 0;
 
 --e
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('חיפה', 'צפון');
-INSERT INTO RoyHadad_Settlements (settlement, area) VALUES ('קריית שמונה', 'צפון');
 
-INSERT INTO RoyHadad_Schools (name, settlement_id) VALUES ('בית הספר הריאלי', 1);
-INSERT INTO RoyHadad_Schools (name, settlement_id) VALUES ('תיכון הצפון', 2);
+--1. checking student count after initial insertions
+-- Areas
+INSERT INTO RoyHadad_Areas (id, name) VALUES (areas_seq.NEXTVAL, 'צפון');
+-- Settlements
+INSERT INTO RoyHadad_Settlements (id, name, area_id)
+VALUES (settlements_seq.NEXTVAL, 'חיפה', 1);
 
-INSERT INTO RoyHadad_Students (school_id, first_name, last_name) VALUES (1, 'דפנה', 'כהן');
-INSERT INTO RoyHadad_Students (school_id, first_name, last_name) VALUES (1, 'יואב', 'לוי');
-INSERT INTO RoyHadad_Students (school_id, first_name, last_name) VALUES (2, 'נועה', 'ברק');
-INSERT INTO RoyHadad_Students (school_id, first_name, last_name) VALUES (2, 'רן', 'ביטון');
+INSERT INTO RoyHadad_Settlements (id, name, area_id)
+VALUES (settlements_seq.NEXTVAL, 'קריית שמונה', 1);
 
-INSERT INTO RoyHadad_Exams (school_id, field, name, exam_date)
-VALUES (1, 'אנגלית', 'מבחן אנגלית א', DATE '2024-01-10');
+-- Schools
+INSERT INTO RoyHadad_Schools (id, name, settlement_id)
+VALUES (schools_seq.NEXTVAL, 'בית הספר הריאלי', 1);
 
-INSERT INTO RoyHadad_Exams (school_id, field, name, exam_date)
-VALUES (1, 'מתמטיקה', 'מבחן מתמטיקה א', DATE '2024-01-15');
+INSERT INTO RoyHadad_Schools (id, name, settlement_id)
+VALUES (schools_seq.NEXTVAL, 'תיכון הצפון', 2);
 
-INSERT INTO RoyHadad_Exams (school_id, field, name, exam_date)
-VALUES (2, 'אנגלית', 'מבחן אנגלית ב', DATE '2024-02-10');
+-- Students
+INSERT INTO RoyHadad_Students (id, school_id, first_name, last_name)
+VALUES (students_seq.NEXTVAL, 1, 'דפנה', 'כהן');
 
-INSERT INTO RoyHadad_Exams (school_id, field, name, exam_date)
-VALUES (2, 'מתמטיקה', 'מבחן מתמטיקה ב', DATE '2024-02-15');
+INSERT INTO RoyHadad_Students (id, school_id, first_name, last_name)
+VALUES (students_seq.NEXTVAL, 1, 'יואב', 'לוי');
 
--- exam 1: אנגלית, school 1
-INSERT INTO RoyHadad_Scores (exam_id, student_id, score) VALUES (1, 1, 75);
-INSERT INTO RoyHadad_Scores (exam_id, student_id, score) VALUES (1, 2, 85);
+INSERT INTO RoyHadad_Students (id, school_id, first_name, last_name)
+VALUES (students_seq.NEXTVAL, 2, 'נועה', 'ברק');
 
--- exam 2: מתמטיקה, school 1
-INSERT INTO RoyHadad_Scores (exam_id, student_id, score) VALUES (2, 1, 2);
-INSERT INTO RoyHadad_Scores (exam_id, student_id, score) VALUES (2, 2, 98);
+INSERT INTO RoyHadad_Students (id, school_id, first_name, last_name)
+VALUES (students_seq.NEXTVAL, 2, 'רן', 'ביטון');
 
-SELECT * FROM RoyHadad_Schools;
+SELECT id, name, total_students
+  FROM RoyHadad_Schools;
 
-DELETE FROM RoyHadad_Scores
-WHERE student_id = 1;
+-- 2. Checking student count after updating student's school
+UPDATE RoyHadad_Students
+   SET school_id = 2
+ WHERE id = 2;
+
+SELECT id, name, total_students
+  FROM RoyHadad_Schools;
+
+--3. Checking student count after deleting a student
 DELETE FROM RoyHadad_Students
-WHERE id = 1;
+ WHERE id = 1;
+
+SELECT id, name, total_students
+  FROM RoyHadad_Schools
+ ORDER BY id;
 
 
-SELECT * FROM RoyHadad_Schools;
