@@ -1,23 +1,27 @@
 --a + b
-ALTER TABLE RoyHadad_Settlements
+ALTER TABLE Roy_Hadad_Settlements
 ADD status NUMBER DEFAULT 1;
 
 --c
-CREATE OR REPLACE PACKAGE RoyHadad_city_updater AS
-    PROCEDURE RoyHadad_update_city;
-    END RoyHadad_city_updater; 
-/  
-CREATE OR REPLACE PACKAGE BODY RoyHadad_city_updater AS 
-    PROCEDURE RoyHadad_update_city IS
+CREATE OR REPLACE PACKAGE Roy_Hadad_city_updater AS
+    PROCEDURE Roy_Hadad_update_city;
+END Roy_Hadad_city_updater; 
+  
+CREATE OR REPLACE PACKAGE BODY Roy_Hadad_city_updater AS 
+    PROCEDURE Roy_Hadad_update_city AS
     BEGIN
-        UPDATE RoyHadad_Settlements
-        SET status = 2
-        WHERE status = 1;
-    END RoyHadad_update_city;
-END RoyHadad_city_updater;
-/
+        UPDATE Roy_Hadad_Settlements
+           SET status = 2
+         WHERE status = 1;
+    END Roy_Hadad_update_city;
+END Roy_Hadad_city_updater;
+
 
 --d
+BEGIN
+    DBMS_SCHEDULER.drop_job('ROYHADAD_JOB');
+END;
+
 BEGIN
     DBMS_SCHEDULER.create_job(
         job_name => 'ROYHADAD_JOB',
@@ -27,6 +31,6 @@ BEGIN
         repeat_interval => 'FREQ=SECONDLY; INTERVAL=30',
         enabled => TRUE
     );
-    END;
-    /
+END;
+    
     
