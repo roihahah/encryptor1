@@ -28,7 +28,7 @@ CREATE OR REPLACE TRIGGER trg_students_maintain_school_count
         END IF;
     END IF;
 END;
-/
+
     
 --c
 DELETE FROM roy_hadad_exams;
