@@ -23,24 +23,31 @@ INSERT INTO Roy_Hadad_Students (id, school_id, first_name, last_name) VALUES (st
 INSERT INTO Roy_Hadad_Students (id, school_id, first_name, last_name) VALUES (students_seq.NEXTVAL, 3, 'תמר', 'שלום');
 INSERT INTO Roy_Hadad_Students (id, school_id, first_name, last_name) VALUES (students_seq.NEXTVAL, 4, 'איתי', 'מלכה');
 
+--Subjects
+INSERT INTO roy_hadad_subjects(id ,name)
+VALUES (subjects_seq.NEXTVAL , 'אנגלית');
+
+INSERT INTO roy_hadad_subjects(id ,name)
+VALUES (subjects_seq.NEXTVAL , 'מתמטיקה');
+
 -- Exams
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 1, 'אנגלית', 'מבחן אנגלית א', DATE '2024-01-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 1, 'מבחן אנגלית א', DATE '2024-01-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 1, 'מתמטיקה', 'מבחן מתמטיקה א', DATE '2024-01-15');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 2, 'מבחן מתמטיקה א', DATE '2024-01-15');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 2, 'אנגלית', 'מבחן אנגלית ב', DATE '2024-02-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 1, 'מבחן אנגלית ב', DATE '2024-02-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 2, 'מתמטיקה', 'מבחן מתמטיקה ב', DATE '2024-02-15');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 2, 'מבחן מתמטיקה ב', DATE '2024-02-15');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 3, 'אנגלית', 'מבחן אנגלית ג', DATE '2024-03-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 1, 'מבחן אנגלית ג', DATE '2024-03-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 4, 'מתמטיקה', 'מבחן מתמטיקה ד', DATE '2024-03-20');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 2, 'מבחן מתמטיקה ד', DATE '2024-03-20');
 
 -- Scores
 -- exam 1: אנגלית, school 1
