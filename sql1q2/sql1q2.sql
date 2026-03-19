@@ -11,7 +11,7 @@ SELECT s.score, e.exam_date
   FROM Roy_Hadad_Exams e
   JOIN Roy_Hadad_Scores s
     ON e.id = s.exam_id
- WHERE e.exam_date >= DATE '1995-01-01';
+ WHERE e.exam_date >= TO_DATE('1995-01-01');
 
 --c
 SELECT students.first_name, students.last_name
