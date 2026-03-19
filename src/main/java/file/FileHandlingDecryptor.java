@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileHandlingDecryptor extends FileHandling{
+public class FileHandlingDecryptor extends FileHandling
+{
 
     /**
      * getting an integer key from a file
@@ -12,7 +13,8 @@ public class FileHandlingDecryptor extends FileHandling{
      * @return the integer key
      */
 
-    public int getKey(Path path) throws IOException {
+    public int getKey(Path path) throws IOException
+    {
         //getting the path for the key from the directory of the given path
         Path keyFilePath = path.getParent().resolve("key.txt");
         //getting the content of the key file and returning the integer key
@@ -24,7 +26,8 @@ public class FileHandlingDecryptor extends FileHandling{
      * @param path the location for saving the file
      * @param data the data to save in the file
      */
-    public void saveDecryptedData(byte[] data , Path path) throws IOException {
+    public void saveDecryptedData(byte[] data , Path path) throws IOException
+    {
 
         //getting the file name and its extension
         String fileName = path.getFileName().toString();

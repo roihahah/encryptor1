@@ -6,23 +6,24 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-public class Main {
+public class Main
+{
     private static final String ENCRYPT_OPTION = "E";
     private static final String DECRYPT_OPTION = "D";
 
-    public static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) throws IOException
+    {
         Scanner scanner = new Scanner(System.in);
         System.out.println("-- Welcome to the most program of programs --");
-        System.out.println("Enter " + ENCRYPT_OPTION + " for Encryption of a file or " + DECRYPT_OPTION + " for Decryption : ");
+        System.out.println("Enter " + ENCRYPT_OPTION + " for Encryption of a file or " + DECRYPT_OPTION + " for Decryption: ");
 
-        String ans =  (scanner.next()).toUpperCase();
+        String userChoice =  (scanner.next()).toUpperCase();
         scanner.nextLine();
 
         //if the user chooses to encrypt a file
-        if(ans.equals(ENCRYPT_OPTION)){
+        if(userChoice.equals(ENCRYPT_OPTION))
+        {
             System.out.println("Welcome to the encryption");
-
 
             //initializing the crypto service and the file handling objects  for the encryption
             CryptoService cryptoService = new CryptoService();
@@ -39,10 +40,10 @@ public class Main {
 
             //saving the encrypted data
             fileHandler.saveEncryptedData(encryptedData , path , key);
-            
         }
         //if the user chooses to decrypt a file
-        else if (ans.equals(DECRYPT_OPTION)) {
+        else if (userChoice.equals(DECRYPT_OPTION))
+        {
             System.out.println("Welcome to the decryption");
             //initializing the crypto service and the file handling objects for the decryption
             CryptoService cryptoService = new CryptoService();
@@ -58,10 +59,6 @@ public class Main {
 
             //saving the decrypted data
             fileHandler.saveDecryptedData(decryptedData , path);
-
-
         }
-
-
     }
 }

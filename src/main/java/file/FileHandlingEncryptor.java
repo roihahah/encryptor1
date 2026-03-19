@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileHandlingEncryptor extends FileHandling {
+public class FileHandlingEncryptor extends FileHandling
+{
 
     /**
      *saves the encrypted data to a new file ("source_file_name"_encrypted) and stores the encryption key
      * in a separate file (key.txt)
-     *
      * example:
      * input file -> name.txt
      * encrypted -> name_encrypted.txt
@@ -19,7 +19,8 @@ public class FileHandlingEncryptor extends FileHandling {
      * @param data data of the encrypted file to save
      * @param key the integer user in the encryption
      */
-    public void saveEncryptedData(byte[] data , Path path , int key) throws IOException {
+    public void saveEncryptedData(byte[] data , Path path , int key) throws IOException
+    {
 
         //getting the file name and its extension
         String fileName = path.getFileName().toString();

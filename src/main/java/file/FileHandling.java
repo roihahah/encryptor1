@@ -5,7 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-public class FileHandling {
+public class FileHandling
+{
 
     /**
      *Validates that the given path exist and refers to a regular file
@@ -14,14 +15,17 @@ public class FileHandling {
      *
      */
 
-    public void checkPath(Path path){
+    public void checkPath(Path path)
+    {
         //checks if the file exist
-        if(!Files.exists(path)){
+        if(!Files.exists(path))
+        {
             throw new IllegalArgumentException("File does not exist");
 
         }
         //check that the path points to a regular file and not to a dir
-        if(!Files.isRegularFile(path)){
+        if(!Files.isRegularFile(path))
+        {
             throw new IllegalArgumentException("not a valid file");
 
         }
@@ -33,7 +37,8 @@ public class FileHandling {
      * @return a validated path representing the user file
      */
 
-    public Path getSourceFilePath(Scanner scanner) {
+    public Path getSourceFilePath(Scanner scanner)
+    {
         System.out.println("Enter a path for the file : ");
         String user_path = scanner.nextLine();
 
@@ -48,7 +53,8 @@ public class FileHandling {
      * @param path path to the file
      * @return a byte array with the file data
      */
-    public byte[] getFileData(Path path) throws IOException{
+    public byte[] getFileData(Path path) throws IOException
+    {
         return Files.readAllBytes(path);
     }
 }
