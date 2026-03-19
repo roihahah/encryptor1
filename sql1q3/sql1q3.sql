@@ -1,10 +1,10 @@
 
 --a
 SELECT schools.id, students.id, students.first_name, students.last_name, ROUND(AVG(scores.score), 2) AS avg_score
-  FROM Roy_Hadad_Students students
-  JOIN Roy_Hadad_Schools schools
+  FROM roy_hadad_students students
+  JOIN roy_hadad_schools schools
     ON students.school_id = schools.id
-  JOIN Roy_Hadad_Scores scores
+  JOIN roy_hadad_scores scores
     ON students.id = scores.student_id
  WHERE schools.name = 'בית הספר לאומניות'
  GROUP BY schools.id,
@@ -14,8 +14,8 @@ SELECT schools.id, students.id, students.first_name, students.last_name, ROUND(A
 
 --b
 SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
-  FROM Roy_Hadad_Exams exams
-  JOIN Roy_Hadad_Scores scores
+  FROM roy_hadad_exams exams
+  JOIN roy_hadad_scores scores
     ON scores.exam_id = exams.id
   JOIN roy_hadad_students students
     ON students.id = scores.student_id
@@ -26,8 +26,8 @@ SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
 
 --c
 SELECT schools.id, ROUND(AVG(scores.score), 2) AS avg_score
-  FROM Roy_Hadad_Exams exams
-  JOIN Roy_Hadad_Scores scores
+  FROM roy_hadad_exams exams
+  JOIN roy_hadad_scores scores
     ON scores.exam_id = exams.id
   JOIN roy_hadad_students students
     ON students.id = scores.student_id
@@ -40,8 +40,8 @@ SELECT schools.id, ROUND(AVG(scores.score), 2) AS avg_score
 
 --d
 SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
-  FROM Roy_Hadad_Exams exams
-  JOIN Roy_Hadad_Scores scores
+  FROM roy_hadad_exams exams
+  JOIN roy_hadad_scores scores
     ON scores.exam_id = exams.id
   JOIN roy_hadad_students students
     ON students.id = scores.student_id
@@ -55,8 +55,8 @@ SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
 
 --e
 SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
-  FROM Roy_Hadad_Exams exams
-  JOIN Roy_Hadad_Scores scores
+  FROM roy_hadad_exams exams
+  JOIN roy_hadad_scores scores
     ON scores.exam_id = exams.id
   JOIN roy_hadad_students students
     ON students.id = scores.student_id
@@ -71,8 +71,8 @@ SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
 --f
 
 SELECT students.id, students.first_name, students.last_name, ROUND(AVG(scores.score) , 2) AS avg_score
-  FROM Roy_Hadad_Students students
-  JOIN Roy_Hadad_Scores scores
+  FROM roy_hadad_students students
+  JOIN roy_hadad_scores scores
     ON scores.student_id = students.id
  GROUP BY students.id, students.first_name, students.last_name
  ORDER BY avg_score DESC
@@ -81,8 +81,8 @@ SELECT students.id, students.first_name, students.last_name, ROUND(AVG(scores.sc
 
 --g
 SELECT students.id, students.first_name, students.last_name, ROUND(AVG(scores.score), 2) AS avg_score
-  FROM Roy_Hadad_Exams exams
-  JOIN Roy_Hadad_Scores scores
+  FROM roy_hadad_exams exams
+  JOIN roy_hadad_scores scores
     ON scores.exam_id = exams.id
   JOIN roy_hadad_students students
     ON students.id = scores.student_id
@@ -99,51 +99,44 @@ SELECT students.id, students.first_name, students.last_name, ROUND(AVG(scores.sc
 --
 ----version 1
 SELECT school_id, school_name, student_id, student_first_name, student_last_name, avg_score
-  FROM (
-    SELECT schools.id AS school_id,
-           schools.name AS school_name,
-           students.id AS student_id,
-           students.first_name AS student_first_name,
-           students.last_name AS student_last_name,
-           ROUND(AVG(scores.score), 2) AS avg_score , 
-           RANK() OVER(PARTITION BY schools.id  ORDER BY AVG(scores.score) DESC) AS rnk
-      FROM Roy_Hadad_Schools schools
-      JOIN Roy_Hadad_Students students
-        ON schools.id = students.school_id
-      JOIN Roy_Hadad_Scores scores
-        ON scores.student_id = students.id
-     GROUP BY schools.id, schools.name, students.id, students.first_name, students.last_name
-    )
+  FROM (SELECT schools.id AS school_id,
+               schools.name AS school_name,
+               students.id AS student_id,
+               students.first_name AS student_first_name,
+               students.last_name AS student_last_name,
+               ROUND(AVG(scores.score), 2) AS avg_score , 
+               RANK() OVER(PARTITION BY schools.id  ORDER BY AVG(scores.score) DESC) AS rnk
+          FROM roy_hadad_schools schools
+          JOIN roy_hadad_students students
+            ON schools.id = students.school_id
+          JOIN roy_hadad_scores scores
+            ON scores.student_id = students.id
+         GROUP BY schools.id, schools.name, students.id, students.first_name, students.last_name)
  WHERE rnk = 1
  ORDER BY avg_score DESC;
  
 --version 2
 SELECT school_max.school_id,  students_avg.school_name, students_avg.student_id, students_avg.student_first_name, students_avg.student_last_name,  students_avg.avg_score
-  FROM(
-    SELECT schools.id AS school_id,
-           schools.name AS school_name,
-           students.id AS student_id,
-           students.first_name AS student_first_name,
-           students.last_name AS student_last_name,
-           ROUND(AVG(scores.score), 2) AS avg_score
-      FROM Roy_Hadad_Schools schools
-      JOIN Roy_Hadad_Students students
-        ON schools.id = students.school_id
-      JOIN Roy_Hadad_Scores scores
-        ON scores.student_id = students.id
-     GROUP BY schools.id, schools.name, students.id, students.first_name, students.last_name
-       ) students_avg
-  JOIN(
-        SELECT school_id, MAX(avg_score) AS max_score
-        FROM(
-            SELECT schools.id AS school_id, students.id, ROUND(AVG(scores.score), 2) AS avg_score
-              FROM Roy_Hadad_Schools schools
-              JOIN Roy_Hadad_Students students
-                ON students.school_id = schools.id
-              JOIN Roy_Hadad_Scores scores
-                ON scores.student_id = students.id
-             GROUP BY schools.id, students.id
-        )
+  FROM(SELECT schools.id AS school_id,
+              schools.name AS school_name,
+              students.id AS student_id,
+              students.first_name AS student_first_name,
+              students.last_name AS student_last_name,
+              ROUND(AVG(scores.score), 2) AS avg_score
+         FROM roy_hadad_schools schools
+         JOIN roy_hadad_students students
+           ON schools.id = students.school_id
+         JOIN roy_hadad_scores scores
+           ON scores.student_id = students.id
+        GROUP BY schools.id, schools.name, students.id, students.first_name, students.last_name) students_avg
+  JOIN(SELECT school_id, MAX(avg_score) AS max_score
+        FROM(SELECT schools.id AS school_id, students.id, ROUND(AVG(scores.score), 2) AS avg_score
+               FROM roy_hadad_schools schools
+               JOIN roy_hadad_students students
+                 ON students.school_id = schools.id
+               JOIN roy_hadad_scores scores
+                 ON scores.student_id = students.id
+              GROUP BY schools.id, students.id)
         GROUP BY school_id) school_max
     ON school_max.school_id = students_avg.school_id
    AND school_max.max_score = students_avg.avg_score
