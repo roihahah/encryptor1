@@ -1,21 +1,20 @@
 BEGIN
-    EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_scores CASCADE CONSTRAINTS';
-    EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_exams CASCADE CONSTRAINTS';
-    EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_students CASCADE CONSTRAINTS';
-    EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_schools CASCADE CONSTRAINTS';
-    EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_settlements CASCADE CONSTRAINTS';
-    EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_areas CASCADE CONSTRAINTS';
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_scores CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_exams CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_subjects CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_students CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_schools CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_settlements CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE roy_hadad_areas CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
 
-    EXECUTE IMMEDIATE 'DROP SEQUENCE areas_seq';
-    EXECUTE IMMEDIATE 'DROP SEQUENCE settlements_seq';
-    EXECUTE IMMEDIATE 'DROP SEQUENCE schools_seq';
-    EXECUTE IMMEDIATE 'DROP SEQUENCE students_seq';
-    EXECUTE IMMEDIATE 'DROP SEQUENCE exams_seq';
-    EXECUTE IMMEDIATE 'DROP SEQUENCE subjects_seq';
-
-EXCEPTION
-    WHEN OTHERS THEN NULL;
+    BEGIN EXECUTE IMMEDIATE 'DROP SEQUENCE areas_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP SEQUENCE settlements_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP SEQUENCE schools_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP SEQUENCE students_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP SEQUENCE exams_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+    BEGIN EXECUTE IMMEDIATE 'DROP SEQUENCE subjects_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
 END;
+
 
 CREATE SEQUENCE areas_seq START WITH 1;
 
@@ -41,17 +40,17 @@ CREATE TABLE roy_hadad_settlements (
     
     CONSTRAINT fk_settlements_area_id
         FOREIGN KEY (area_id)
-        REFERENCES Roy_Hadad_Areas(id)
+        REFERENCES roy_hadad_areas(id)
 );
 
-CREATE TABLE Roy_Hadad_Schools (
+CREATE TABLE roy_hadad_schools (
     id              NUMBER PRIMARY KEY,
     name            VARCHAR2(255),
     settlement_id   NUMBER,
     
     CONSTRAINT fk_schools_settlement_id
         FOREIGN KEY (settlement_id)
-        REFERENCES Roy_Hadad_Settlements(id)
+        REFERENCES roy_hadad_settlements(id)
 );
 
 
@@ -64,19 +63,7 @@ CREATE TABLE roy_hadad_students (
 
     CONSTRAINT fk_students_school_id
         FOREIGN KEY (school_id)
-        REFERENCES Roy_Hadad_Schools(id)
-);
-
-CREATE TABLE roy_hadad_exams (
-    id          NUMBER PRIMARY KEY,
-    school_id   NUMBER,
-    field       VARCHAR2(255),
-    name        VARCHAR2(255),
-    exam_date   DATE,
-    
-    CONSTRAINT fk_exams_school_id
-        FOREIGN KEY (school_id)
-        REFERENCES Roy_Hadad_Schools(id)
+        REFERENCES roy_hadad_schools(id)
 );
 
 CREATE TABLE roy_hadad_subjects (
@@ -85,6 +72,19 @@ CREATE TABLE roy_hadad_subjects (
 
 );
 
+CREATE TABLE roy_hadad_exams (
+    id          NUMBER PRIMARY KEY,
+    subject_id  NUMBER,
+    name        VARCHAR2(255),
+    exam_date   DATE,
+    
+    CONSTRAINT fk_exams_subject_id
+        FOREIGN KEY (subject_id)
+        REFERENCES roy_hadad_subjects(id)
+);
+
+
+
 CREATE TABLE roy_hadad_scores (
     exam_id     NUMBER,
     student_id  NUMBER,
@@ -92,11 +92,11 @@ CREATE TABLE roy_hadad_scores (
     
     CONSTRAINT fk_scores_exam_id
         FOREIGN KEY (exam_id)
-        REFERENCES Roy_Hadad_Exams(id)
+        REFERENCES roy_hadad_exams(id)
         ,
     CONSTRAINT fk_scores_student_id
         FOREIGN KEY (student_id)
-        REFERENCES Roy_Hadad_Students(id)
+        REFERENCES roy_hadad_students(id)
         ,
     CONSTRAINT chk_score
         CHECK (score BETWEEN 0 AND 100)
