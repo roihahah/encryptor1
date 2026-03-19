@@ -15,7 +15,6 @@ BEGIN
     BEGIN EXECUTE IMMEDIATE 'DROP SEQUENCE subjects_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
 END;
 
-
 create sequence areas_seq 
 minvalue 1
 maxvalue 9999999999999999999999999
@@ -83,8 +82,6 @@ CREATE TABLE roy_hadad_schools (
         REFERENCES roy_hadad_settlements(id)
 );
 
-
-
 CREATE TABLE roy_hadad_students (
     id          NUMBER PRIMARY KEY,
     school_id   NUMBER,
@@ -99,7 +96,6 @@ CREATE TABLE roy_hadad_students (
 CREATE TABLE roy_hadad_subjects (
     id     NUMBER PRIMARY KEY,
     name   VARCHAR2(255) UNIQUE NOT NULL
-
 );
 
 CREATE TABLE roy_hadad_exams (
@@ -112,8 +108,6 @@ CREATE TABLE roy_hadad_exams (
         FOREIGN KEY (subject_id)
         REFERENCES roy_hadad_subjects(id)
 );
-
-
 
 CREATE TABLE roy_hadad_scores (
     exam_id     NUMBER,
@@ -130,5 +124,4 @@ CREATE TABLE roy_hadad_scores (
         ,
     CONSTRAINT chk_score
         CHECK (score BETWEEN 0 AND 100)
-    
 );
