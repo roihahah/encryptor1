@@ -11,7 +11,7 @@ SELECT name
 --c
 SELECT scores.score, subjects.name 
   FROM roy_hadad_exams exams
-  JOIN Roy_Hadad_Scores scores
+  JOIN roy_hadad_scores scores
     ON exams.id = scores.exam_id
   JOIN roy_hadad_subjects subjects
     ON subjects.id = exams.subject_id

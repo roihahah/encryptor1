@@ -16,17 +16,47 @@ BEGIN
 END;
 
 
-CREATE SEQUENCE areas_seq START WITH 1;
+create sequence areas_seq 
+minvalue 1
+maxvalue 9999999999999999999999999
+start with 1
+increment by 1
+cache 20;
 
-CREATE SEQUENCE settlements_seq START WITH 1;
+CREATE SEQUENCE settlements_seq
+minvalue 1
+maxvalue 9999999999999999999999999
+start with 1
+increment by 1
+cache 20;
 
-CREATE SEQUENCE schools_seq START WITH 1;
+CREATE SEQUENCE schools_seq
+minvalue 1
+maxvalue 9999999999999999999999999
+start with 1
+increment by 1
+cache 20;
 
-CREATE SEQUENCE students_seq START WITH 1;
+CREATE SEQUENCE students_seq
+minvalue 1
+maxvalue 9999999999999999999999999
+start with 1
+increment by 1
+cache 20;
 
-CREATE SEQUENCE exams_seq START WITH 1;
+CREATE SEQUENCE exams_seq
+minvalue 1
+maxvalue 9999999999999999999999999
+start with 1
+increment by 1
+cache 20;
 
-CREATE SEQUENCE subjects_seq START WITH 1;
+CREATE SEQUENCE subjects_seq
+minvalue 1
+maxvalue 9999999999999999999999999
+start with 1
+increment by 1
+cache 20;
 
 CREATE TABLE roy_hadad_areas (
     id          NUMBER PRIMARY KEY,
