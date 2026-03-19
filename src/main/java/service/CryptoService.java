@@ -12,7 +12,6 @@ public class CryptoService
      */
     public int createKey()
     {
-        //initializing a java Random object
         Random rand = new Random();
         return rand.nextInt(10) + 1;
     }
@@ -24,10 +23,8 @@ public class CryptoService
      */
     public byte[] encrypt(byte[] data , int key)
     {
-        //initializing an empty byte array for the result of the encryption
         byte[] result = new byte[data.length];
 
-        //adding for each byte the key and putting it in the appropriate element of the result array
         for (int i = 0; i < data.length; i++) {
             result[i] = (byte) (data[i] + key);
         }
@@ -42,10 +39,8 @@ public class CryptoService
      */
     public byte[] decrypt(byte[] data, int key)
     {
-        //initializing an empty byte array for the result of the decryption
         byte[] result = new byte[data.length];
 
-        //subtracting for each byte the key and putting it in the appropriate element of the result array
         for (int i = 0; i < data.length; i++) {
             result[i] = (byte) (data[i] - key);
         }

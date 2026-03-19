@@ -17,13 +17,11 @@ public class FileHandling
 
     public void checkPath(Path path)
     {
-        //checks if the file exist
         if(!Files.exists(path))
         {
             throw new IllegalArgumentException("File does not exist");
 
         }
-        //check that the path points to a regular file and not to a dir
         if(!Files.isRegularFile(path))
         {
             throw new IllegalArgumentException("not a valid file");
