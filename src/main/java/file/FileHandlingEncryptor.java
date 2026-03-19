@@ -22,19 +22,29 @@ public class FileHandlingEncryptor extends FileHandling
     public void saveEncryptedData(byte[] data , Path path , int key) throws IOException
     {
 
+        Path encryptedFilePath = buildEncryptedFilePath(path);
+        Files.write(encryptedFilePath , data);
+
+        Path keyFilePath = buildSecretKeyFilePath(path);
+        Files.writeString(keyFilePath , Integer.toString(key));
+
+        System.out.println("The encrypted file and the secret key (don't share it, its במ) saved in the paths " + encryptedFilePath.toString() + " for the encrypted file and "  +
+                keyFilePath.toString() + " for the secret key");
+    }
+
+    public Path buildEncryptedFilePath(Path path)
+    {
         String fileName = path.getFileName().toString();
         String name = fileName.substring(0 , fileName.lastIndexOf('.'));
         String extension = fileName.substring(fileName.lastIndexOf('.'));
 
         String encryptedFileName = name + "_encrypted" + extension;
-        Path encryptedFilePath = path.getParent().resolve(encryptedFileName);
-
-        Files.write(encryptedFilePath , data);
-
-        Path keyFilePath = path.getParent().resolve("key.txt");
-        Files.writeString(keyFilePath , Integer.toString(key));
-
-        System.out.println("The encrypted file and the secret key(don't share it, its במ) saved in the paths " + encryptedFilePath.toString() + " for the encrypted file and "  +
-                keyFilePath.toString() + " for the secret key");
+        return path.getParent().resolve(encryptedFileName);
     }
+
+    public Path buildSecretKeyFilePath(Path path)
+    {
+        return path.getParent().resolve("key.txt");
+    }
+
 }

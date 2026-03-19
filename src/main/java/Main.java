@@ -33,7 +33,6 @@ public class Main
             int key = cryptoService.createKey();
             byte[] encryptedData = cryptoService.encrypt(data , key);
 
-
             fileHandler.saveEncryptedData(encryptedData , path , key);
         }
         else if (userChoice.equals(DECRYPT_OPTION))

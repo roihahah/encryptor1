@@ -5,7 +5,6 @@ import java.util.Random;
 public class CryptoService
 {
     public int key;
-
     /**
      *creating a random integer from 1-10
      * @return an integer

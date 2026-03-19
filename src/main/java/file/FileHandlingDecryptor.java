@@ -26,15 +26,19 @@ public class FileHandlingDecryptor extends FileHandling
      */
     public void saveDecryptedData(byte[] data , Path path) throws IOException
     {
+        Path decryptedFilePath = buildDecryptedFilePath(path);
+        Files.write(decryptedFilePath , data);
+
+        System.out.println("The decrypted file written to : " + decryptedFilePath.toString());
+    }
+
+    public Path buildDecryptedFilePath(Path path)
+    {
         String fileName = path.getFileName().toString();
         String name = fileName.substring(0 , fileName.lastIndexOf("_encrypted"));
         String extension = fileName.substring(fileName.lastIndexOf('.'));
 
         String decryptedFileName = name + "_decrypted" + extension;
-        Path decryptedFilePath = path.getParent().resolve(decryptedFileName);
-
-        Files.write(decryptedFilePath , data);
-
-        System.out.println("The decrypted file written to : " + decryptedFilePath.toString());
+        return path.getParent().resolve(decryptedFileName);
     }
 }
