@@ -7,18 +7,20 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Main {
+    private static final String ENCRYPT_OPTION = "E";
+    private static final String DECRYPT_OPTION = "D";
 
     public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("-- Welcome to the most program of programs --");
-        System.out.println("Enter E for Encryption of a file or D for Decryption : ");
+        System.out.println("Enter " + ENCRYPT_OPTION + " for Encryption of a file or " + DECRYPT_OPTION + " for Decryption : ");
 
         String ans =  (scanner.next()).toUpperCase();
         scanner.nextLine();
 
         //if the user chooses to encrypt a file
-        if(ans.equals("E")){
+        if(ans.equals(ENCRYPT_OPTION)){
             System.out.println("Welcome to the encryption");
 
 
@@ -40,7 +42,7 @@ public class Main {
             
         }
         //if the user chooses to decrypt a file
-        else if (ans.equals("D")) {
+        else if (ans.equals(DECRYPT_OPTION)) {
             System.out.println("Welcome to the decryption");
             //initializing the crypto service and the file handling objects for the decryption
             CryptoService cryptoService = new CryptoService();
