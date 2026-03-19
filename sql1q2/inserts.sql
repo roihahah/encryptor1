@@ -31,21 +31,37 @@ VALUES (students_seq.NEXTVAL, 3, 'דן', 'ברק');
 INSERT INTO Roy_Hadad_Students (id, school_id, first_name, last_name)
 VALUES (students_seq.NEXTVAL, 4, 'איתי', 'מלכה');
 
+--subjects
+INSERT INTO roy_hadad_subjects (id, name)
+VALUES (subjects_seq.NEXTVAL, 'מתמטיקה');
+
+INSERT INTO roy_hadad_subjects (id, name)
+VALUES (subjects_seq.NEXTVAL, 'אנגלית');
+
+INSERT INTO roy_hadad_subjects (id, name)
+VALUES (subjects_seq.NEXTVAL, 'פיזיקה');
+
+INSERT INTO roy_hadad_subjects (id, name)
+VALUES (subjects_seq.NEXTVAL, 'ספרות');
+
+INSERT INTO roy_hadad_subjects (id, name)
+VALUES (subjects_seq.NEXTVAL, 'היסטוריה');
+    
 -- Exams
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 1, 'מתמטיקה', 'מבחן אמצע', DATE '2000-01-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL,1, 'מבחן אמצע', DATE '2000-01-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 1, 'אנגלית', 'מבחן סמסטר', DATE '2001-03-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 2, 'מבחן סמסטר', DATE '2001-03-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 2, 'פיזיקה', 'בוחן', DATE '1998-06-15');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL,3, 'בוחן', DATE '1998-06-15');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 3, 'ספרות', 'מבחן', DATE '2005-02-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL,4, 'מבחן', DATE '2005-02-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 4, 'היסטוריה', 'בוחן', DATE '1999-05-20');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL,5, 'בוחן', DATE '1999-05-20');
 
 -- Scores (no sequence here)
 INSERT INTO Roy_Hadad_Scores (exam_id, student_id, score)
