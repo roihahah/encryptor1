@@ -35,39 +35,55 @@ INSERT INTO Roy_Hadad_Students (id, school_id, first_name, last_name) VALUES (st
 INSERT INTO Roy_Hadad_Students (id, school_id, first_name, last_name) VALUES (students_seq.NEXTVAL, 5, 'עדי', 'חכם');
 INSERT INTO Roy_Hadad_Students (id, school_id, first_name, last_name) VALUES (students_seq.NEXTVAL, 5, 'נועם', 'מור');
 
+--subjects
+INSERT INTO roy_hadad_subjects(id , name)
+VALUES (subjects_seq.NEXTVAL, 'כימיה');
+
+INSERT INTO roy_hadad_subjects(id , name)
+VALUES (subjects_seq.NEXTVAL, 'מתמטיקה');
+
+INSERT INTO roy_hadad_subjects(id , name)
+VALUES (subjects_seq.NEXTVAL, 'ביולוגיה');
+
+INSERT INTO roy_hadad_subjects(id , name)
+VALUES (subjects_seq.NEXTVAL, 'היסטוריה');
+
+INSERT INTO roy_hadad_subjects(id , name)
+VALUES (subjects_seq.NEXTVAL, 'ספרות');
+
 -- Exams
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 1, 'כימיה', 'מבחן כימיה א', DATE '2024-01-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 1, 'מבחן כימיה א', DATE '2024-01-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 1, 'מתמטיקה', 'מבחן מתמטיקה א', DATE '2024-02-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 2, 'מבחן מתמטיקה א', DATE '2024-02-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 1, 'ביולוגיה', 'מבחן ביולוגיה א', DATE '2024-03-10');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 3, 'מבחן ביולוגיה א', DATE '2024-03-10');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 2, 'ביולוגיה', 'מבחן ביולוגיה ב', DATE '2024-01-12');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 3, 'מבחן ביולוגיה ב', DATE '2024-01-12');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 2, 'כימיה', 'מבחן כימיה ב', DATE '2024-02-14');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 1, 'מבחן כימיה ב', DATE '2024-02-14');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 2, 'מתמטיקה', 'מבחן מתמטיקה ב', DATE '2024-03-15');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 2, 'מבחן מתמטיקה ב', DATE '2024-03-15');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 3, 'מתמטיקה', 'מבחן מתמטיקה ג', DATE '2024-01-18');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 2, 'מבחן מתמטיקה ג', DATE '2024-01-18');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 3, 'כימיה', 'מבחן כימיה ג', DATE '2024-02-20');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 1, 'מבחן כימיה ג', DATE '2024-02-20');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 4, 'כימיה', 'מבחן כימיה ד', DATE '2024-01-25');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 1, 'מבחן כימיה ד', DATE '2024-01-25');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 4, 'היסטוריה', 'מבחן היסטוריה ד', DATE '2024-03-01');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 4, 'מבחן היסטוריה ד', DATE '2024-03-01');
 
-INSERT INTO Roy_Hadad_Exams (id, school_id, field, name, exam_date)
-VALUES (exams_seq.NEXTVAL, 5, 'ספרות', 'מבחן ספרות ה', DATE '2024-02-01');
+INSERT INTO Roy_Hadad_Exams (id, subject_id, name, exam_date)
+VALUES (exams_seq.NEXTVAL, 5, 'מבחן ספרות ה', DATE '2024-02-01');
 
 -- Scores
 -- בית הספר לאומניות
