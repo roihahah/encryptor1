@@ -20,7 +20,7 @@ public class Main
         String userChoice =  (scanner.next()).toUpperCase();
         scanner.nextLine();
 
-        if(userChoice.equals(ENCRYPT_OPTION))
+        if (userChoice.equals(ENCRYPT_OPTION))
         {
             System.out.println("Welcome to the encryption");
 
