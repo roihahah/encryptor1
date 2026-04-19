@@ -26,7 +26,7 @@ END;
 
 BEGIN
     DBMS_SCHEDULER.create_job(
-        job_name => 'UPDATE_SETTLEMENT_STATUS_JOB',
+        job_name => 'ROY_HADAD_UPDATE_SETTLEMENT_STATUS_JOB',
         job_type => 'PLSQL_BLOCK',
         job_action => 'BEGIN roy_hadad_city_updater.roy_hadad_update_city; END;',
         start_date => SYSTIMESTAMP,
