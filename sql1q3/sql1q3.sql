@@ -1,4 +1,3 @@
-
 --a
 SELECT schools.id, students.id, students.first_name, students.last_name, ROUND(AVG(scores.score), 2) AS avg_score
   FROM roy_hadad_students students
@@ -55,16 +54,16 @@ SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
 
 --e
 SELECT schools.id, schools.name, ROUND(AVG(scores.score), 2) AS avg_score
-  FROM roy_hadad_exams exams
-  JOIN roy_hadad_scores scores
-    ON scores.exam_id = exams.id
-  JOIN roy_hadad_students students
-    ON students.id = scores.student_id
-  JOIN roy_hadad_schools schools
-    ON schools.id = students.school_id
-  JOIN roy_hadad_subjects subjects
+  FROM roy_hadad_schools schools
+  LEFT JOIN roy_hadad_students students
+    ON students.school_id = schools.id
+  LEFT JOIN roy_hadad_scores scores
+    ON scores.student_id = students.id
+  LEFT JOIN roy_hadad_exams exams
+    ON exams.id = scores.exam_id
+  LEFT JOIN roy_hadad_subjects subjects
     ON subjects.id = exams.subject_id
- WHERE subjects.name = 'כימיה'
+   AND subjects.name = 'כימיה'
  GROUP BY schools.id, schools.name
  ORDER BY avg_score DESC;
 
@@ -77,7 +76,6 @@ SELECT students.id, students.first_name, students.last_name, ROUND(AVG(scores.sc
  GROUP BY students.id, students.first_name, students.last_name
  ORDER BY avg_score DESC
  FETCH FIRST 1 ROW ONLY;
-
 
 --g
 SELECT students.id, students.first_name, students.last_name, ROUND(AVG(scores.score), 2) AS avg_score
