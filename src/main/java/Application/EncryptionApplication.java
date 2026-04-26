@@ -1,12 +1,11 @@
 package Application;
 
-import file.FileHandlingDecryptor;
-import file.FileHandlingEncryptor;
-import service.CryptoService;
+import command.Command;
 import service.UserInputService;
-
+import command.DecryptionCommand;
+import command.EncryptionCommand;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.util.Map;
 
 public class EncryptionApplication {
     private static final String ENCRYPT_OPTION = "E";
@@ -18,48 +17,12 @@ public class EncryptionApplication {
         UserInputService userInputService = new UserInputService();
         String userChoice = userInputService.getUserInput("Enter " + ENCRYPT_OPTION + " for Encryption of a file or " + DECRYPT_OPTION + " for Decryption and press enter to confirm: ");
 
-        switch (userChoice)
-        {
-            case "E":
-                runEncryptionProgram();
-                break;
-            case "D":
-                runDecryptionProgram();
-                break;
-            default:
-                System.out.println("Unrecognizable Option");
-        }
-    }
+        Map<String, Command> operations = Map.of(
+                "E", new EncryptionCommand(),
+                "D", new DecryptionCommand()
+        );
 
-    public static void runEncryptionProgram() throws IOException
-    {
-        System.out.println("Welcome to the encryption");
-
-        CryptoService cryptoService = new CryptoService();
-        FileHandlingEncryptor fileHandler = new FileHandlingEncryptor();
-
-        Path path = fileHandler.getSourceFilePath();
-        String data = fileHandler.getFileData(path);
-
-        int key = cryptoService.createKey();
-        String encryptedData = cryptoService.encrypt(data, key);
-
-        fileHandler.saveEncryptedData(encryptedData, path, key);
-    }
-
-    public static void runDecryptionProgram() throws IOException
-    {
-        System.out.println("Welcome to the decryption");
-
-        CryptoService cryptoService = new CryptoService();
-        FileHandlingDecryptor fileHandler = new FileHandlingDecryptor();
-
-        Path path = fileHandler.getSourceFilePath();
-        String data = fileHandler.getFileData(path);
-
-        int key = fileHandler.getKey(path);
-        String decryptedData = cryptoService.decrypt(data , key);
-
-        fileHandler.saveDecryptedData(decryptedData , path);
+        Command op = operations.get(userChoice);
+        op.Execute();
     }
 }

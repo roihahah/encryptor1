@@ -5,7 +5,6 @@ import java.util.Random;
 public class CryptoService
 {
     public int key;
-
     public int createKey()
     {
         Random rand = new Random();

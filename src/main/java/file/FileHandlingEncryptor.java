@@ -34,5 +34,4 @@ public class FileHandlingEncryptor extends FileHandling
     {
         return path.getParent().resolve("key.txt");
     }
-
 }
