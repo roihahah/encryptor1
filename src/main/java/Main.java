@@ -15,10 +15,8 @@ public class Main
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("-- Welcome to the most program of programs --");
-        System.out.println("Enter " + ENCRYPT_OPTION + " for Encryption of a file or " + DECRYPT_OPTION + " for Decryption: ");
-
-        String userChoice =  (scanner.next()).toUpperCase();
-        scanner.nextLine();
+        System.out.println("Enter " + ENCRYPT_OPTION + " for Encryption of a file or " + DECRYPT_OPTION + " for Decryption and press enter to confirm: ");
+        String userChoice =  (scanner.nextLine()).toUpperCase();
 
         if (userChoice.equals(ENCRYPT_OPTION))
         {
