@@ -11,22 +11,28 @@ public class CryptoService
         Random rand = new Random();
         return rand.nextInt(10) + 1;
     }
-    public byte[] encrypt(byte[] data , int key)
-    {
-        byte[] result = new byte[data.length];
 
-        for (int i = 0; i < data.length; i++) {
-            result[i] = (byte) (data[i] + key);
+    public String encrypt(String data , int key)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for(char c: data.toCharArray())
+        {
+            result.append((char)(c + key));
         }
-        return result;
+
+        return result.toString();
     }
-    public byte[] decrypt(byte[] data, int key)
-    {
-        byte[] result = new byte[data.length];
 
-        for (int i = 0; i < data.length; i++) {
-            result[i] = (byte) (data[i] - key);
+    public String decrypt(String data, int key)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for(char c: data.toCharArray())
+        {
+            result.append((char)(c - key));
         }
-        return result;
+
+        return result.toString();
     }
 }

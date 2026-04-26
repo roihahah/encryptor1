@@ -39,10 +39,10 @@ public class EncryptionApplication {
         FileHandlingEncryptor fileHandler = new FileHandlingEncryptor();
 
         Path path = fileHandler.getSourceFilePath();
-        byte[] data = fileHandler.getFileData(path);
+        String data = fileHandler.getFileData(path);
 
         int key = cryptoService.createKey();
-        byte[] encryptedData = cryptoService.encrypt(data, key);
+        String encryptedData = cryptoService.encrypt(data, key);
 
         fileHandler.saveEncryptedData(encryptedData, path, key);
     }
@@ -55,10 +55,10 @@ public class EncryptionApplication {
         FileHandlingDecryptor fileHandler = new FileHandlingDecryptor();
 
         Path path = fileHandler.getSourceFilePath();
-        byte[] data = fileHandler.getFileData(path);
+        String data = fileHandler.getFileData(path);
 
         int key = fileHandler.getKey(path);
-        byte[] decryptedData = cryptoService.decrypt(data , key);
+        String decryptedData = cryptoService.decrypt(data , key);
 
         fileHandler.saveDecryptedData(decryptedData , path);
     }

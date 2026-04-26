@@ -31,8 +31,8 @@ public class FileHandling
         return path;
     }
 
-    public byte[] getFileData(Path path) throws IOException
+    public String getFileData(Path path) throws IOException
     {
-        return Files.readAllBytes(path);
+        return Files.readString(path);
     }
 }
