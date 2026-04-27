@@ -12,8 +12,11 @@ public class DecryptionCommand implements CryptoCommand
         FileHandlingDecryptor fileHandlingDecryptor = new FileHandlingDecryptor();
 
         int key = fileHandlingDecryptor.getKey(path);
-        String decryptedData = CryptoUtils.decrypt(data , key);
+        String decryptedData = CryptoUtils.decrypt(data, key);
 
-        fileHandlingDecryptor.saveDecryptedData(decryptedData, path);
+        Path decryptedFilePath = fileHandlingDecryptor.buildDecryptedFilePath(path);
+        fileHandlingDecryptor.saveFileData(decryptedData, decryptedFilePath);
+
+        System.out.println("The decrypted file written to : " + decryptedFilePath.toString());
     }
 }

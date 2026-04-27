@@ -38,4 +38,13 @@ public class FileHandling
             throw new RuntimeException("Can not Read File Data" + e);
         }
     }
+
+    public void saveFileData(String data, Path path)
+    {
+        try {
+            Files.writeString(path , data);
+        } catch (IOException e) {
+            throw new RuntimeException("Can not save decrypted data" + e);
+        }
+    }
 }

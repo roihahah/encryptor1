@@ -16,18 +16,6 @@ public class FileHandlingDecryptor extends FileHandling
         }
     }
 
-    public void saveDecryptedData(String data , Path path)
-    {
-        Path decryptedFilePath = buildDecryptedFilePath(path);
-        try {
-            Files.writeString(decryptedFilePath , data);
-        } catch (IOException e) {
-            throw new RuntimeException("Can not save decrypted data" + e);
-        }
-
-        System.out.println("The decrypted file written to : " + decryptedFilePath.toString());
-    }
-
     public Path buildDecryptedFilePath(Path path)
     {
         String fileName = path.getFileName().toString();
