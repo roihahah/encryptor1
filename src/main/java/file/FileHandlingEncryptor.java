@@ -7,14 +7,22 @@ import java.nio.file.Path;
 
 public class FileHandlingEncryptor extends FileHandling
 {
-    public void saveEncryptedData(String data , Path path , int key) throws IOException
+    public void saveEncryptedData(String data , Path path , int key)
     {
-
         Path encryptedFilePath = buildEncryptedFilePath(path);
-        Files.writeString(encryptedFilePath , data);
+        try {
+            Files.writeString(encryptedFilePath , data);
+        } catch (IOException e) {
+            throw new RuntimeException("Can not save Encrypted Data " + e);
+        }
 
         Path keyFilePath = buildSecretKeyFilePath(path);
-        Files.writeString(keyFilePath , Integer.toString(key));
+
+        try {
+            Files.writeString(keyFilePath , Integer.toString(key));
+        } catch (IOException e) {
+            throw new RuntimeException("Can not save key data " + e);
+        }
 
         System.out.println("The encrypted file and the secret key (don't share it, its במ) saved in the paths " + encryptedFilePath.toString() + " for the encrypted file and "  +
                 keyFilePath.toString() + " for the secret key");

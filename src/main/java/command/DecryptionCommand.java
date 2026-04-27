@@ -1,27 +1,19 @@
 package command;
 
+import Utils.CryptoUtils;
 import file.FileHandlingDecryptor;
-import service.CryptoService;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
-public class DecryptionCommand implements Command
+public class DecryptionCommand implements CryptoCommand
 {
     @Override
-    public void execute() throws IOException
-    {
-        System.out.println("Welcome to the decryption");
+    public void execute(String data, Path path) {
+        FileHandlingDecryptor fileHandlingDecryptor = new FileHandlingDecryptor();
 
-        CryptoService cryptoService = new CryptoService();
-        FileHandlingDecryptor fileHandler = new FileHandlingDecryptor();
+        int key = fileHandlingDecryptor.getKey(path);
+        String decryptedData = CryptoUtils.decrypt(data , key);
 
-        Path path = fileHandler.getSourceFilePath();
-        String data = fileHandler.getFileData(path);
-
-        int key = fileHandler.getKey(path);
-        String decryptedData = cryptoService.decrypt(data , key);
-
-        fileHandler.saveDecryptedData(decryptedData , path);
+        fileHandlingDecryptor.saveDecryptedData(decryptedData, path);
     }
 }

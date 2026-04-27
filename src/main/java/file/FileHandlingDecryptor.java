@@ -6,16 +6,24 @@ import java.nio.file.Path;
 
 public class FileHandlingDecryptor extends FileHandling
 {
-    public int getKey(Path path) throws IOException
+    public int getKey(Path path)
     {
         Path keyFilePath = path.getParent().resolve("key.txt");
-        return Integer.parseInt(Files.readString(keyFilePath));
+        try {
+            return Integer.parseInt(Files.readString(keyFilePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can not get key" + e);
+        }
     }
 
-    public void saveDecryptedData(String data , Path path) throws IOException
+    public void saveDecryptedData(String data , Path path)
     {
         Path decryptedFilePath = buildDecryptedFilePath(path);
-        Files.writeString(decryptedFilePath , data);
+        try {
+            Files.writeString(decryptedFilePath , data);
+        } catch (IOException e) {
+            throw new RuntimeException("Can not save decrypted data" + e);
+        }
 
         System.out.println("The decrypted file written to : " + decryptedFilePath.toString());
     }

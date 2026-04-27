@@ -1,27 +1,18 @@
 package command;
 
 import file.FileHandlingEncryptor;
-import service.CryptoService;
+import Utils.CryptoUtils;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
-public class EncryptionCommand implements Command
+public class EncryptionCommand implements CryptoCommand
 {
     @Override
-    public void execute() throws IOException
-    {
-        System.out.println("Welcome to the encryption");
+    public void execute(String data, Path path) {
+        int key = CryptoUtils.createKey();
+        String encryptedData = CryptoUtils.encrypt(data, key);
 
-        CryptoService cryptoService = new CryptoService();
         FileHandlingEncryptor fileHandler = new FileHandlingEncryptor();
-
-        Path path = fileHandler.getSourceFilePath();
-        String data = fileHandler.getFileData(path);
-
-        int key = cryptoService.createKey();
-        String encryptedData = cryptoService.encrypt(data, key);
-
         fileHandler.saveEncryptedData(encryptedData, path, key);
     }
 }

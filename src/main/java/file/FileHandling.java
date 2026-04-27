@@ -31,8 +31,12 @@ public class FileHandling
         return path;
     }
 
-    public String getFileData(Path path) throws IOException
+    public String getFileData(Path path)
     {
-        return Files.readString(path);
+        try {
+            return Files.readString(path);
+        } catch (IOException e) {
+            throw new RuntimeException("Can not Read File Data" + e);
+        }
     }
 }

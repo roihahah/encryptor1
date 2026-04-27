@@ -1,17 +1,16 @@
-package service;
+package Utils;
 
 import java.util.Random;
 
-public class CryptoService
+public class CryptoUtils
 {
-    public int key;
-    public int createKey()
+    public static int createKey()
     {
         Random rand = new Random();
         return rand.nextInt(10) + 1;
     }
 
-    public String encrypt(String data , int key)
+    public static String encrypt(String data , int key)
     {
         StringBuilder result = new StringBuilder();
 
@@ -23,7 +22,7 @@ public class CryptoService
         return result.toString();
     }
 
-    public String decrypt(String data, int key)
+    public static String decrypt(String data, int key)
     {
         StringBuilder result = new StringBuilder();
 
