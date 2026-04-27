@@ -22,8 +22,8 @@ public class EncryptionApplication
                         "\nand press enter to confirm: ");
 
         Map<String, Command> operations = Map.of(
-                "E", new EncryptionCommand(),
-                "D", new DecryptionCommand()
+                ENCRYPT_OPTION, new EncryptionCommand(),
+                DECRYPT_OPTION, new DecryptionCommand()
         );
 
         Command command = operations.get(userChoice);
