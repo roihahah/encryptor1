@@ -9,7 +9,7 @@ import java.nio.file.Path;
 public class EncryptionCommand implements Command
 {
     @Override
-    public void Execute() throws IOException
+    public void execute() throws IOException
     {
         System.out.println("Welcome to the encryption");
 

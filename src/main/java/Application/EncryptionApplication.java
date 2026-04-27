@@ -12,7 +12,7 @@ public class EncryptionApplication
     private static final String ENCRYPT_OPTION = "E";
     private static final String DECRYPT_OPTION = "D";
 
-    public static void run() throws IOException {
+    public static void run(){
         System.out.println("-- Welcome to the most program of programs --");
 
         UserInputService userInputService = new UserInputService();
@@ -27,6 +27,10 @@ public class EncryptionApplication
         );
 
         Command command = operations.get(userChoice);
-        command.Execute();
+        try {
+            command.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
