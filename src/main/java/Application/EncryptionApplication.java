@@ -25,7 +25,7 @@ public class EncryptionApplication {
                 "D", new DecryptionCommand()
         );
 
-        Command op = operations.get(userChoice);
-        op.Execute();
+        Command command = operations.get(userChoice);
+        command.Execute();
     }
 }
