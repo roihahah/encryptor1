@@ -15,7 +15,10 @@ public class EncryptionApplication {
         System.out.println("-- Welcome to the most program of programs --");
 
         UserInputService userInputService = new UserInputService();
-        String userChoice = userInputService.getUserInput("Enter " + ENCRYPT_OPTION + " for Encryption of a file or " + DECRYPT_OPTION + " for Decryption and press enter to confirm: ");
+        String userChoice = userInputService.getUserInput(
+                "Enter " + ENCRYPT_OPTION + " for Encryption of a file or "
+                        + DECRYPT_OPTION + " for Decryption" +
+                        "\nand press enter to confirm: ");
 
         Map<String, Command> operations = Map.of(
                 "E", new EncryptionCommand(),
