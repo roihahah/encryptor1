@@ -15,9 +15,4 @@ public class FileHandlingEncryptor extends FileHandling
         String encryptedFileName = name + "_encrypted" + extension;
         return path.getParent().resolve(encryptedFileName);
     }
-
-    public Path buildSecretKeyFilePath(Path path)
-    {
-        return path.getParent().resolve("key.txt");
-    }
 }

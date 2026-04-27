@@ -47,4 +47,8 @@ public class FileHandling
             throw new RuntimeException("Can not save decrypted data" + e);
         }
     }
+    public Path buildSecretKeyFilePath(Path path)
+    {
+        return path.getParent().resolve("key.txt");
+    }
 }

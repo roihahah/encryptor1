@@ -8,12 +8,8 @@ public class FileHandlingDecryptor extends FileHandling
 {
     public int getKey(Path path)
     {
-        Path keyFilePath = path.getParent().resolve("key.txt");
-        try {
-            return Integer.parseInt(Files.readString(keyFilePath));
-        } catch (IOException e) {
-            throw new RuntimeException("Can not get key" + e);
-        }
+        Path keyFilePath = buildSecretKeyFilePath(path);
+        return Integer.parseInt(getFileData(keyFilePath));
     }
 
     public Path buildDecryptedFilePath(Path path)
