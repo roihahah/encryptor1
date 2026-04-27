@@ -7,7 +7,8 @@ import command.EncryptionCommand;
 import java.io.IOException;
 import java.util.Map;
 
-public class EncryptionApplication {
+public class EncryptionApplication
+{
     private static final String ENCRYPT_OPTION = "E";
     private static final String DECRYPT_OPTION = "D";
 
