@@ -22,18 +22,32 @@ public class EncryptionApplication
     public static void run()
     {
         FileHandling fileHandler = new FileHandling();
-        UserInputService userInputService = new UserInputService();
 
         System.out.println("-- Welcome to the most program of programs --");
-        String userChoice = userInputService.getUserInput(
-                "Enter " + ENCRYPT_OPTION + " for Encryption of a file or "
-                        + DECRYPT_OPTION + " for Decryption" +
-                        "\nand press enter to confirm: ");
+        String userChoice = getUserChoice();
 
         Path path = fileHandler.getSourceFilePath();
         String data = fileHandler.getFileData(path);
 
         CryptoCommand command = operations.get(userChoice);
         command.execute(data, path);
+    }
+
+    public static String getUserChoice()
+    {
+        UserInputService userInputService = new UserInputService();
+        String userChoice;
+        while (true) {
+            userChoice = userInputService.getUserInput(
+                    "Enter " + ENCRYPT_OPTION + " for Encryption of a file or "
+                            + DECRYPT_OPTION + " for Decryption" +
+                            "\nand press enter to confirm: ");
+            if (operations.containsKey(userChoice)) {
+                break;
+            }
+
+            System.out.println("Invalid input. Please enter E or D.\n");
+        }
+        return userChoice;
     }
 }
