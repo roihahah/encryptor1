@@ -8,7 +8,8 @@ import java.nio.file.Path;
 public class EncryptionCommand implements CryptoCommand
 {
     @Override
-    public void execute(String data, Path path) {
+    public void execute(String data, Path path)
+    {
         FileHandlingEncryptor fileHandlerEncryptor = new FileHandlingEncryptor();
 
         int key = CryptoUtils.createKey();

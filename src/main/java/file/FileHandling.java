@@ -41,12 +41,15 @@ public class FileHandling
 
     public void saveFileData(String data, Path path)
     {
-        try {
+        try
+        {
             Files.writeString(path , data);
-        } catch (IOException e) {
-            throw new RuntimeException("Can not save decrypted data" + e);
+        } catch (IOException e)
+        {
+            throw new RuntimeException("Can not save decrypted data " + e);
         }
     }
+
     public Path buildSecretKeyFilePath(Path path)
     {
         return path.getParent().resolve("key.txt");

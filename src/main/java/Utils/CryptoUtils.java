@@ -14,9 +14,9 @@ public class CryptoUtils
     {
         StringBuilder result = new StringBuilder();
 
-        for(char c: data.toCharArray())
+        for(char c : data.toCharArray())
         {
-            result.append((char)(c + key));
+            result.append((char) (c + key));
         }
 
         return result.toString();
@@ -26,9 +26,9 @@ public class CryptoUtils
     {
         StringBuilder result = new StringBuilder();
 
-        for(char c: data.toCharArray())
+        for(char c : data.toCharArray())
         {
-            result.append((char)(c - key));
+            result.append((char) (c - key));
         }
 
         return result.toString();

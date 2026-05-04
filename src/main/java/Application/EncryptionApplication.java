@@ -19,7 +19,8 @@ public class EncryptionApplication
             DECRYPT_OPTION, new DecryptionCommand()
     );
 
-    public static void run(){
+    public static void run()
+    {
         FileHandling fileHandler = new FileHandling();
         UserInputService userInputService = new UserInputService();
 
