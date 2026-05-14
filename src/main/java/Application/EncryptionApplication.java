@@ -35,19 +35,24 @@ public class EncryptionApplication
 
     public static String getUserChoice()
     {
-        UserInputService userInputService = new UserInputService();
-        String userChoice;
-        while (true) {
-            userChoice = userInputService.getUserInput(
-                    "Enter " + ENCRYPT_OPTION + " for Encryption of a file or "
-                            + DECRYPT_OPTION + " for Decryption" +
-                            "\nand press enter to confirm: ");
+        String userChoice = getUserOperation();
+        while (!operations.containsKey(userChoice))
+        {
+            System.out.println("Invalid input. Please enter E or D.\n");
+            userChoice = getUserOperation();
             if (operations.containsKey(userChoice)) {
                 break;
             }
-
-            System.out.println("Invalid input. Please enter E or D.\n");
         }
         return userChoice;
+    }
+
+    public static String getUserOperation()
+    {
+        UserInputService userInputService = new UserInputService();
+        return userInputService.getUserInput(
+                "Enter " + ENCRYPT_OPTION + " for Encryption of a file or "
+                        + DECRYPT_OPTION + " for Decryption" +
+                        "\nand press enter to confirm: ");
     }
 }
