@@ -32,9 +32,12 @@ public class FileHandling
 
     public String getFileData(Path path)
     {
-        try {
+        try
+        {
             return Files.readString(path);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException("Can not Read File Data" + e);
         }
     }
@@ -44,7 +47,8 @@ public class FileHandling
         try
         {
             Files.writeString(path , data);
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             throw new RuntimeException("Can not save decrypted data " + e);
         }
