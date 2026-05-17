@@ -12,25 +12,25 @@ public class RepeatEncryption implements  EncryptionAlgorithm
     }
 
     @Override
-    public byte[] encrypt(byte[] data, int key)
+    public byte[] encrypt(byte[] data, EncryptionKey keys)
     {
         byte[] res = data;
         for (int i = 0; i < this.timesToRepeat; i++)
         {
-            res = encryptionAlgorithm.encrypt(res , key);
+            res = encryptionAlgorithm.encrypt(res , keys);
         }
 
         return res;
     }
 
     @Override
-    public byte[] decrypt(byte[] data, int key)
+    public byte[] decrypt(byte[] data, EncryptionKey keys)
     {
         byte[] res = data;
 
         for (int i = 0; i < this.timesToRepeat; i++)
         {
-            res = encryptionAlgorithm.decrypt(res , key);
+            res = encryptionAlgorithm.decrypt(res , keys);
         }
 
         return res;

@@ -1,10 +1,13 @@
 package file;
 
+import encryption.EncryptionKey;
+
 import java.io.IOException;
 import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -57,10 +60,14 @@ public final class FileUtils
         return Files.readAllBytes(path);
     }
 
-    public static int getKey(Path path) throws IOException
+    public static EncryptionKey getKey(Path path) throws IOException
     {
         checkPath(path);
-        return Integer.parseInt(Files.readString(path));
+        List<String> lines = Files.readAllLines(path);
+        int firstKey = Integer.parseInt(lines.get(0));
+        int secondKey = lines.size() > 1 ? Integer.parseInt(lines.get(1)) : firstKey;
+
+        return new EncryptionKey(firstKey,secondKey);
     }
 
     public static void saveData(byte[] data , Path path) throws IOException

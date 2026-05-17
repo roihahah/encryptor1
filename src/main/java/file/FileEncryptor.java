@@ -1,6 +1,7 @@
 package file;
 
 import encryption.EncryptionAlgorithm;
+import encryption.EncryptionKey;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -14,23 +15,23 @@ public class FileEncryptor
     }
 
     public void encryptFile(Path inputFilePath , Path outputFilePath
-    ,Path keyFilePath) throws IOException
+    ,Path keysFilePath) throws IOException
     {
         byte[] data = FileUtils.getFileData(inputFilePath);
-        int key = FileUtils.getKey(keyFilePath);
+        EncryptionKey keys = FileUtils.getKey(keysFilePath);
 
-        byte[] encryptedData = encryptionAlgorithm.encrypt(data , key);
+        byte[] encryptedData = encryptionAlgorithm.encrypt(data , keys);
 
         FileUtils.saveData(encryptedData , outputFilePath);
     }
 
     public void decryptFile(Path encryptedFilePath , Path outputFilePath
-            ,Path keyFilePath) throws IOException
+            ,Path keysFilePath) throws IOException
     {
         byte[] data = FileUtils.getFileData(encryptedFilePath);
-        int key = FileUtils.getKey(keyFilePath);
+        EncryptionKey keys = FileUtils.getKey(keysFilePath);
 
-        byte[] decryptedData = encryptionAlgorithm.decrypt(data , key);
+        byte[] decryptedData = encryptionAlgorithm.decrypt(data , keys);
 
         FileUtils.saveData(decryptedData , outputFilePath);
     }
