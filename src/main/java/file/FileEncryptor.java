@@ -14,8 +14,7 @@ public class FileEncryptor
         this.encryptionAlgorithm = encryptionAlgorithm;
     }
 
-    public void encryptFile(Path inputFilePath , Path outputFilePath
-    ,Path keysFilePath) throws IOException
+    public void encryptFile(Path inputFilePath , Path outputFilePath, Path keysFilePath)
     {
         byte[] data = FileUtils.getFileData(inputFilePath);
         EncryptionKey keys = FileUtils.getKey(keysFilePath);
@@ -25,8 +24,7 @@ public class FileEncryptor
         FileUtils.saveData(encryptedData , outputFilePath);
     }
 
-    public void decryptFile(Path encryptedFilePath , Path outputFilePath
-            ,Path keysFilePath) throws IOException
+    public void decryptFile(Path encryptedFilePath , Path outputFilePath, Path keysFilePath)
     {
         byte[] data = FileUtils.getFileData(encryptedFilePath);
         EncryptionKey keys = FileUtils.getKey(keysFilePath);

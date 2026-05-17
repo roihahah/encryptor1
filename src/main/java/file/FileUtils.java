@@ -16,27 +16,23 @@ public final class FileUtils
 
     private FileUtils(){} // to prevent initialization of a utility class וכאלה
 
-    public static void checkPath(Path path) throws IOException
-    {
+    public static void checkPath(Path path) {
         Objects.requireNonNull(path, "Path cannot be null");
 
-        if(!Files.exists(path))
-        {
-            throw new NoSuchFileException(path.toString());
+        if (!Files.exists(path)) {
+            throw new IllegalArgumentException("File does not exist: " + path);
         }
 
-        if(!Files.isRegularFile(path))
-        {
-            throw new FileSystemException(path.toString(), null, "Not a regular file");
+        if (!Files.isRegularFile(path)) {
+            throw new IllegalArgumentException("Path is not a regular file: " + path);
         }
 
-        if (!Files.isReadable(path))
-        {
-            throw new FileSystemException(path.toString(), null, "File is not readable");
+        if (!Files.isReadable(path)) {
+            throw new IllegalArgumentException("File is not readable: " + path);
         }
     }
 
-    public static Path getValidatedFilePath(Scanner scanner) throws IOException
+    public static Path getValidatedFilePath(Scanner scanner)
     {
         System.out.println("Enter a path for the file : ");
         String userPath = scanner.nextLine();
@@ -47,32 +43,58 @@ public final class FileUtils
         return path;
     }
 
-    public static Path getValidatedFilePath(String userPath) throws IOException
+    public static Path getValidatedFilePath(String userPath)
     {
         Path path = Path.of(userPath);
         checkPath(path);
         return path;
     }
 
-    public static byte[] getFileData(Path path) throws IOException
+    public static byte[] getFileData(Path path)
     {
         checkPath(path);
-        return Files.readAllBytes(path);
+        try
+        {
+            return Files.readAllBytes(path);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static EncryptionKey getKey(Path path) throws IOException
+    public static EncryptionKey getKey(Path path)
     {
-        checkPath(path);
-        List<String> lines = Files.readAllLines(path);
+        List<String> lines = getLinesFromFile(path);
         int firstKey = Integer.parseInt(lines.get(0));
         int secondKey = lines.size() > 1 ? Integer.parseInt(lines.get(1)) : firstKey;
 
         return new EncryptionKey(firstKey,secondKey);
     }
 
-    public static void saveData(byte[] data , Path path) throws IOException
+    public static List<String> getLinesFromFile(Path path)
     {
-        Files.write(path , data);
+        checkPath(path);
+        try
+        {
+            return Files.readAllLines(path);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void saveData(byte[] data , Path path)
+    {
+        try
+        {
+            Files.write(path , data);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
         System.out.println("The file written to : " + path.toString());
     }
 }
