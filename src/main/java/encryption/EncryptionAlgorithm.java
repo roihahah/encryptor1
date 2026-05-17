@@ -2,7 +2,7 @@ package encryption;
 
 public interface EncryptionAlgorithm
 {
-    byte[] encrypt(byte[] data , EncryptionKey keys);
-    byte[] decrypt(byte[] data , EncryptionKey keys);
+    String encrypt(String data , EncryptionKey keys);
+    String decrypt(String data , EncryptionKey keys);
 }
 

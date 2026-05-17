@@ -16,20 +16,20 @@ public class FileEncryptor
 
     public void encryptFile(Path inputFilePath , Path outputFilePath, Path keysFilePath)
     {
-        byte[] data = FileUtils.getFileData(inputFilePath);
+        String data = FileUtils.getFileData(inputFilePath);
         EncryptionKey keys = FileUtils.getKey(keysFilePath);
 
-        byte[] encryptedData = encryptionAlgorithm.encrypt(data , keys);
+        String encryptedData = encryptionAlgorithm.encrypt(data , keys);
 
         FileUtils.saveData(encryptedData , outputFilePath);
     }
 
     public void decryptFile(Path encryptedFilePath , Path outputFilePath, Path keysFilePath)
     {
-        byte[] data = FileUtils.getFileData(encryptedFilePath);
+        String data = FileUtils.getFileData(encryptedFilePath);
         EncryptionKey keys = FileUtils.getKey(keysFilePath);
 
-        byte[] decryptedData = encryptionAlgorithm.decrypt(data , keys);
+        String decryptedData = encryptionAlgorithm.decrypt(data , keys);
 
         FileUtils.saveData(decryptedData , outputFilePath);
     }

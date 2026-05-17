@@ -50,12 +50,12 @@ public final class FileUtils
         return path;
     }
 
-    public static byte[] getFileData(Path path)
+    public static String getFileData(Path path)
     {
         checkPath(path);
         try
         {
-            return Files.readAllBytes(path);
+            return Files.readString(path);
         }
         catch (IOException e)
         {
@@ -85,11 +85,11 @@ public final class FileUtils
         }
     }
 
-    public static void saveData(byte[] data , Path path)
+    public static void saveData(String data , Path path)
     {
         try
         {
-            Files.write(path , data);
+            Files.writeString(path , data);
         }
         catch (IOException e)
         {

@@ -10,16 +10,16 @@ public class DoubleEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public byte[] encrypt(byte[] data, EncryptionKey keys)
+    public String encrypt(String data, EncryptionKey keys)
     {
-        byte[] encryptedOnce = encryptionAlgorithm.encrypt(data , keys.withFirstKeyOnly());
+        String encryptedOnce = encryptionAlgorithm.encrypt(data , keys.withFirstKeyOnly());
         return encryptionAlgorithm.encrypt(encryptedOnce , keys.withSecondKeyOnly());
     }
 
     @Override
-    public byte[] decrypt(byte[] data, EncryptionKey keys)
+    public String decrypt(String data, EncryptionKey keys)
     {
-        byte[] decryptedOnce = encryptionAlgorithm.decrypt(data , keys.withFirstKeyOnly());
+        String decryptedOnce = encryptionAlgorithm.decrypt(data , keys.withFirstKeyOnly());
         return encryptionAlgorithm.decrypt(decryptedOnce , keys.withSecondKeyOnly());
     }
 }

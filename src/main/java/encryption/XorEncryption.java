@@ -3,19 +3,19 @@ package encryption;
 public class XorEncryption implements EncryptionAlgorithm
 {
     @Override
-    public byte[] encrypt(byte[] data, EncryptionKey keys)
+    public String encrypt(String data, EncryptionKey keys)
     {
-        byte[] res = new byte[data.length];
+        StringBuilder result = new StringBuilder();
         int key = keys.firstKey();
 
-        for (int i = 0; i <data.length ; i++)
+        for (char c : data.toCharArray())
         {
-            res[i] = (byte)(data[i] ^ key);
+            result.append((char) (c ^ key));
         }
 
-        return res;
+        return result.toString();
     }
 
     @Override
-    public byte[] decrypt(byte[] data, EncryptionKey keys) {return encrypt(data , keys);}
+    public String decrypt(String data, EncryptionKey keys) {return encrypt(data , keys);}
 }
