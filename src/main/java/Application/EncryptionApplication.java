@@ -40,9 +40,6 @@ public class EncryptionApplication
         {
             System.out.println("Invalid input. Please enter E or D.\n");
             userChoice = getUserOperation();
-            if (operations.containsKey(userChoice)) {
-                break;
-            }
         }
         return userChoice;
     }
