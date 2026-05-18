@@ -6,7 +6,7 @@ public class XorEncryption implements EncryptionAlgorithm
     public String encrypt(String data, EncryptionKey keys)
     {
         StringBuilder result = new StringBuilder();
-        int key = keys.firstKey();
+        int key = keys.requireFirstKey();
 
         for (char c : data.toCharArray())
         {

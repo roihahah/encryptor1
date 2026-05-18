@@ -1,6 +1,6 @@
 package encryption;
 
-public class RepeatEncryption implements  EncryptionAlgorithm
+public class RepeatEncryption implements EncryptionAlgorithm
 {
     private final int timesToRepeat;
     private final EncryptionAlgorithm encryptionAlgorithm;
@@ -15,9 +15,10 @@ public class RepeatEncryption implements  EncryptionAlgorithm
     public String encrypt(String data, EncryptionKey keys)
     {
         String res = data;
+
         for (int i = 0; i < this.timesToRepeat; i++)
         {
-            res = encryptionAlgorithm.encrypt(res , keys);
+            res = encryptionAlgorithm.encrypt(res, keys);
         }
 
         return res;
@@ -30,7 +31,7 @@ public class RepeatEncryption implements  EncryptionAlgorithm
 
         for (int i = 0; i < this.timesToRepeat; i++)
         {
-            res = encryptionAlgorithm.decrypt(res , keys);
+            res = encryptionAlgorithm.decrypt(res, keys);
         }
 
         return res;

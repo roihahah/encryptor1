@@ -51,8 +51,8 @@ public final class FileUtils
     public static EncryptionKey getKey(Path path)
     {
         List<String> lines = getLinesFromFile(path);
-        int firstKey = Integer.parseInt(lines.get(0));
-        int secondKey = lines.size() > 1 ? Integer.parseInt(lines.get(1)) : firstKey;
+        Integer firstKey = Integer.parseInt(lines.get(0));
+        Integer secondKey = lines.size() > 1 ? Integer.parseInt(lines.get(1)) : null;
 
         return new EncryptionKey(firstKey, secondKey);
     }
@@ -73,7 +73,7 @@ public final class FileUtils
     {
         try
         {
-            Files.writeString(path , data);
+            Files.writeString(path, data);
         }
         catch (IOException e)
         {
