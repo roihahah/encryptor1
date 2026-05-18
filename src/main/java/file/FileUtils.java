@@ -1,22 +1,18 @@
 package file;
 
 import encryption.EncryptionKey;
-
 import java.io.IOException;
-import java.nio.file.FileSystemException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public final class FileUtils
 {
+    private FileUtils() { }
 
-    private FileUtils(){} // to prevent initialization of a utility class וכאלה
-
-    public static void checkPath(Path path) {
+    public static void checkPath(Path path)
+    {
         Objects.requireNonNull(path, "Path cannot be null");
 
         if (!Files.exists(path)) {
@@ -32,27 +28,18 @@ public final class FileUtils
         }
     }
 
-    public static Path getValidatedFilePath(Scanner scanner)
-    {
-        System.out.println("Enter a path for the file : ");
-        String userPath = scanner.nextLine();
-
-        Path path = Path.of(userPath);
-        checkPath(path);
-
-        return path;
-    }
-
     public static Path getValidatedFilePath(String userPath)
     {
         Path path = Path.of(userPath);
         checkPath(path);
+
         return path;
     }
 
     public static String getFileData(Path path)
     {
         checkPath(path);
+
         try
         {
             return Files.readString(path);
@@ -69,12 +56,13 @@ public final class FileUtils
         int firstKey = Integer.parseInt(lines.get(0));
         int secondKey = lines.size() > 1 ? Integer.parseInt(lines.get(1)) : firstKey;
 
-        return new EncryptionKey(firstKey,secondKey);
+        return new EncryptionKey(firstKey, secondKey);
     }
 
-    public static List<String> getLinesFromFile(Path path)
+    private static List<String> getLinesFromFile(Path path)
     {
         checkPath(path);
+
         try
         {
             return Files.readAllLines(path);
@@ -95,6 +83,7 @@ public final class FileUtils
         {
             throw new RuntimeException(e);
         }
-        System.out.println("The file written to : " + path.toString());
+
+        System.out.println("The file written to : " + path);
     }
 }

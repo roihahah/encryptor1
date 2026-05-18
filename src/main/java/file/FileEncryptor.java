@@ -2,15 +2,14 @@ package file;
 
 import encryption.EncryptionAlgorithm;
 import encryption.EncryptionKey;
-
-import java.io.IOException;
 import java.nio.file.Path;
 
 public class FileEncryptor
 {
     private final EncryptionAlgorithm encryptionAlgorithm;
 
-    public FileEncryptor(EncryptionAlgorithm encryptionAlgorithm){
+    public FileEncryptor(EncryptionAlgorithm encryptionAlgorithm)
+    {
         this.encryptionAlgorithm = encryptionAlgorithm;
     }
 

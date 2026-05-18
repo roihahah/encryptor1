@@ -17,5 +17,8 @@ public class XorEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public String decrypt(String data, EncryptionKey keys) {return encrypt(data , keys);}
+    public String decrypt(String data, EncryptionKey keys)
+    {
+        return encrypt(data , keys);
+    }
 }

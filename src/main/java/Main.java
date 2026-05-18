@@ -1,8 +1,6 @@
 import encryption.*;
 import file.FileEncryptor;
 import file.FileUtils;
-
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +8,7 @@ import java.util.Map;
 public class Main
 {
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         Map<String , EncryptionAlgorithm> algorithmMap = new HashMap<>();
         algorithmMap.put("Shift up" , new ShiftUpEncryption());
@@ -22,13 +20,12 @@ public class Main
         Path originalFilePath = FileUtils.getValidatedFilePath( "C:\\temp\\text.txt");
         Path keyFilePath = FileUtils.getValidatedFilePath("C:\\temp\\key.txt");
 
-        for(Map.Entry<String , EncryptionAlgorithm> entry : algorithmMap.entrySet())
+        for (Map.Entry<String , EncryptionAlgorithm> entry : algorithmMap.entrySet())
         {
             String name = entry.getKey();
             Path encryptedFilePath = Path.of("C:", "temp", name, "encrypted.txt");
             Path decryptedFilePath = Path.of("C:", "temp", name, "decrypted.txt");
-            System.out.println("checking : " + name);
-
+            System.out.println("checking: " + name);
 
             FileEncryptor fileEncryptor = new FileEncryptor(entry.getValue());
             fileEncryptor.encryptFile(originalFilePath , encryptedFilePath , keyFilePath);

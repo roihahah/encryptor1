@@ -2,7 +2,7 @@ package encryption;
 
 public class RepeatEncryption implements  EncryptionAlgorithm
 {
-    private int timesToRepeat;
+    private final int timesToRepeat;
     private final EncryptionAlgorithm encryptionAlgorithm;
 
     public RepeatEncryption(int timesToRepeat, EncryptionAlgorithm encryptionAlgorithm)
