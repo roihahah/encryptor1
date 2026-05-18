@@ -2,6 +2,8 @@ package file;
 
 import encryption.EncryptionAlgorithm;
 import encryption.EncryptionKey;
+
+import java.io.File;
 import java.nio.file.Path;
 
 public class FileEncryptor

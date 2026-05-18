@@ -38,8 +38,6 @@ public final class FileUtils
 
     public static String getFileData(Path path)
     {
-        checkPath(path);
-
         try
         {
             return Files.readString(path);
@@ -61,8 +59,6 @@ public final class FileUtils
 
     private static List<String> getLinesFromFile(Path path)
     {
-        checkPath(path);
-
         try
         {
             return Files.readAllLines(path);
