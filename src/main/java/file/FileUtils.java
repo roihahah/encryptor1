@@ -82,4 +82,25 @@ public final class FileUtils
 
         System.out.println("The file written to : " + path);
     }
+
+
+    public static Path buildDecryptedFilePath(Path path)
+    {
+        String fileName = path.getFileName().toString();
+        String name = fileName.substring(0 , fileName.lastIndexOf("_encrypted"));
+        String extension = fileName.substring(fileName.lastIndexOf('.'));
+
+        String decryptedFileName = name + "_decrypted" + extension;
+        return path.getParent().resolve(decryptedFileName);
+    }
+
+    public static Path buildEncryptedFilePath(Path path)
+    {
+        String fileName = path.getFileName().toString();
+        String name = fileName.substring(0 , fileName.lastIndexOf('.'));
+        String extension = fileName.substring(fileName.lastIndexOf('.'));
+
+        String encryptedFileName = name + "_encrypted" + extension;
+        return path.getParent().resolve(encryptedFileName);
+    }
 }
