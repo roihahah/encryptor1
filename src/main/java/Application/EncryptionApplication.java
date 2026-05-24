@@ -1,38 +1,33 @@
 package Application;
 
-import encryption.*;
 import file.FileEncryptor;
 import file.FileUtils;
 import java.nio.file.Path;
-import java.util.Map;
 
 public class EncryptionApplication
 {
-    static final Map<String, EncryptionAlgorithm> algorithmMap = Map.of(
-            "ShiftUp", new ShiftUpEncryption(),
-            "ShiftMultiply", new ShiftMultiplyEncryption(),
-            "Double", new DoubleEncryption(new ShiftUpEncryption()),
-            "Repeat", new RepeatEncryption(3, new ShiftUpEncryption()),
-            "XOR", new XorEncryption()
-    );
+    static final String PROJECT_DIR = "C:\\temp";
+    static final Path ORIGINAL_FILE_PATH = FileUtils.getValidatedFilePath( PROJECT_DIR, "text.txt");
+    static final Path KEY_FILE_PATH = FileUtils.getValidatedFilePath(PROJECT_DIR, "key.txt");
+    static final Path TWO_KEYS_FILE_PATH = FileUtils.getValidatedFilePath(PROJECT_DIR, "key.txt");
 
     public static void run()
     {
-
-        Path originalFilePath = FileUtils.getValidatedFilePath( "C:\\temp\\text.txt");
-        Path keyFilePath = FileUtils.getValidatedFilePath("C:\\temp\\key.txt");
-
-        for (Map.Entry<String , EncryptionAlgorithm> entry : algorithmMap.entrySet())
+        for (UserInputMock userInputMock : UserInputMock.values())
         {
-            String name = entry.getKey();
-            Path outputFile = Path.of("C:", "temp", name);
-            Path encryptedFilePath = FileUtils.buildEncryptedFilePath(outputFile);
-            Path decryptedFilePath = FileUtils.buildDecryptedFilePath(outputFile);
-            System.out.println("checking: " + name);
-
-            FileEncryptor fileEncryptor = new FileEncryptor(entry.getValue());
-            fileEncryptor.encryptFile(originalFilePath , encryptedFilePath , keyFilePath);
-            fileEncryptor.decryptFile(encryptedFilePath , decryptedFilePath , keyFilePath);
+            System.out.println("checking: " + userInputMock.displayName());
+            runAlgorithm(userInputMock);
         }
+    }
+
+    public static void runAlgorithm(UserInputMock userInputMock)
+    {
+        Path outputFile = Path.of(PROJECT_DIR, userInputMock.displayName());
+        Path encryptedFilePath = FileUtils.buildEncryptedFilePath(outputFile);
+        Path decryptedFilePath = FileUtils.buildDecryptedFilePath(outputFile);
+
+        FileEncryptor fileEncryptor = new FileEncryptor(userInputMock.algorithm());
+        fileEncryptor.encryptFile(ORIGINAL_FILE_PATH, encryptedFilePath, userInputMock.keyFilePath());
+        fileEncryptor.decryptFile(encryptedFilePath, decryptedFilePath, userInputMock.keyFilePath());
     }
 }

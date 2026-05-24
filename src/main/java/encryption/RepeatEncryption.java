@@ -12,26 +12,37 @@ public class RepeatEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public String encrypt(String data, EncryptionKey keys)
+    public int requiredKeys() {
+        return 1;
+    }
+
+    @Override
+    public String encrypt(String data, EncryptionKey encryptionKey)
     {
         String res = data;
-
-        for (int i = 0; i < this.timesToRepeat; i++)
+        for(int key : encryptionKey.keys())
         {
-            res = encryptionAlgorithm.encrypt(res, keys);
+            EncryptionKey currentEncryptionKey = new EncryptionKey(new int[] { key });
+            for (int i = 0; i < this.timesToRepeat; i++)
+            {
+                res = encryptionAlgorithm.encrypt(res, currentEncryptionKey);
+            }
         }
 
         return res;
     }
 
     @Override
-    public String decrypt(String data, EncryptionKey keys)
+    public String decrypt(String data, EncryptionKey encryptionKey)
     {
         String res = data;
-
-        for (int i = 0; i < this.timesToRepeat; i++)
+        for (int key : encryptionKey.keys())
         {
-            res = encryptionAlgorithm.decrypt(res, keys);
+            EncryptionKey currentEncryptionKey = new EncryptionKey(new int[] { key });
+            for (int i = 0; i < this.timesToRepeat; i++)
+            {
+                res = encryptionAlgorithm.decrypt(res, currentEncryptionKey);
+            }
         }
 
         return res;

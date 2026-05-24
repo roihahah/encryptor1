@@ -10,26 +10,19 @@ public class DoubleEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public String encrypt(String data, EncryptionKey keys)
-    {
-        checkKeys(keys);
-        String encryptedOnce = encryptionAlgorithm.encrypt(data, keys.withFirstKeyOnly());
-
-        return encryptionAlgorithm.encrypt(encryptedOnce, keys.withSecondKeyOnly());
+    public int requiredKeys() {
+        return 2;
     }
 
     @Override
-    public String decrypt(String data, EncryptionKey keys)
+    public String encrypt(String data, EncryptionKey encryptionKey)
     {
-        checkKeys(keys);
-        String decryptedOnce = encryptionAlgorithm.decrypt(data, keys.withSecondKeyOnly());
-
-        return encryptionAlgorithm.decrypt(decryptedOnce, keys.withFirstKeyOnly());
+        return encryptionAlgorithm.encrypt(data, encryptionKey);
     }
 
-    private void checkKeys(EncryptionKey keys)
+    @Override
+    public String decrypt(String data, EncryptionKey encryptionKey)
     {
-        keys.requireFirstKey();
-        keys.requireSecondKey();
+        return encryptionAlgorithm.decrypt(data, encryptionKey.reverse());
     }
 }

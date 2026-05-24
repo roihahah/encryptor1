@@ -28,9 +28,9 @@ public final class FileUtils
         }
     }
 
-    public static Path getValidatedFilePath(String userPath)
+    public static Path getValidatedFilePath(String userFolder, String userFile)
     {
-        Path path = Path.of(userPath);
+        Path path = Path.of(userFolder, userFile);
         checkPath(path);
 
         return path;
@@ -51,10 +51,15 @@ public final class FileUtils
     public static EncryptionKey getKey(Path path)
     {
         List<String> lines = getLinesFromFile(path);
-        Integer firstKey = Integer.parseInt(lines.get(0));
-        Integer secondKey = lines.size() > 1 ? Integer.parseInt(lines.get(1)) : null;
 
-        return new EncryptionKey(firstKey, secondKey);
+        int[] keys = new int[lines.size()];
+
+        for (int i = 0; i < lines.size(); i++)
+        {
+            keys[i] = Integer.parseInt(lines.get(i));
+        }
+
+        return new EncryptionKey(keys);
     }
 
     private static List<String> getLinesFromFile(Path path)
@@ -69,7 +74,7 @@ public final class FileUtils
         }
     }
 
-    public static void saveData(String data , Path path)
+    public static void saveData(String data, Path path)
     {
         try
         {
@@ -80,14 +85,14 @@ public final class FileUtils
             throw new RuntimeException(e);
         }
 
-        System.out.println("The file written to : " + path);
+        System.out.println("The file written to: " + path);
     }
 
 
     public static Path buildDecryptedFilePath(Path path)
     {
         String fileName = path.getFileName().toString();
-        String name = fileName.substring(0 , fileName.lastIndexOf("_encrypted"));
+        String name = fileName.substring(0, fileName.lastIndexOf("_encrypted"));
         String extension = fileName.substring(fileName.lastIndexOf('.'));
 
         String decryptedFileName = name + "_decrypted" + extension;
@@ -97,7 +102,7 @@ public final class FileUtils
     public static Path buildEncryptedFilePath(Path path)
     {
         String fileName = path.getFileName().toString();
-        String name = fileName.substring(0 , fileName.lastIndexOf('.'));
+        String name = fileName.substring(0, fileName.lastIndexOf('.'));
         String extension = fileName.substring(fileName.lastIndexOf('.'));
 
         String encryptedFileName = name + "_encrypted" + extension;

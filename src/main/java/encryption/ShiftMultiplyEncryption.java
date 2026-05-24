@@ -3,28 +3,36 @@ package encryption;
 public class ShiftMultiplyEncryption implements EncryptionAlgorithm
 {
     @Override
-    public String encrypt(String data, EncryptionKey keys)
+    public int requiredKeys() {
+        return 1;
+    }
+
+    @Override
+    public String encrypt(String data, EncryptionKey encryptionKey)
     {
         StringBuilder result = new StringBuilder();
-        int key = keys.requireFirstKey();
 
-        for (char c : data.toCharArray())
+        for (int key : encryptionKey.keys())
         {
-            result.append((char) (c * key));
+            for (char c : data.toCharArray())
+            {
+                result.append((char) (c * key));
+            }
         }
 
         return result.toString();
     }
 
     @Override
-    public String decrypt(String data, EncryptionKey keys)
+    public String decrypt(String data, EncryptionKey encryptionKey)
     {
         StringBuilder result = new StringBuilder();
-        int key = keys.requireFirstKey();
-
-        for (char c : data.toCharArray())
+        for (int key : encryptionKey.keys())
         {
-            result.append((char) (c / key));
+            for (char c : data.toCharArray())
+            {
+                result.append((char) (c / key));
+            }
         }
 
         return result.toString();

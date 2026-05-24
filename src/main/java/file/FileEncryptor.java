@@ -17,6 +17,7 @@ public class FileEncryptor
     {
         String data = FileUtils.getFileData(inputFilePath);
         EncryptionKey keys = FileUtils.getKey(keysFilePath);
+        validateKeys(keys);
 
         String encryptedData = encryptionAlgorithm.encrypt(data, keys);
 
@@ -27,9 +28,24 @@ public class FileEncryptor
     {
         String data = FileUtils.getFileData(encryptedFilePath);
         EncryptionKey keys = FileUtils.getKey(keysFilePath);
+        validateKeys(keys);
 
         String decryptedData = encryptionAlgorithm.decrypt(data, keys);
 
         FileUtils.saveData(decryptedData, outputFilePath);
+    }
+
+    private void validateKeys(EncryptionKey keys)
+    {
+        int actualKeys = keys.keys().length;
+        int requiredKeys = encryptionAlgorithm.requiredKeys();
+
+        if (actualKeys != requiredKeys)
+        {
+            throw new IllegalArgumentException(
+                    "Invalid number of keys. Expected " + requiredKeys +
+                            " but got " + actualKeys
+            );
+        }
     }
 }

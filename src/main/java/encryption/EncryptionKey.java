@@ -1,26 +1,24 @@
 package encryption;
 
-import java.util.Objects;
-
-public record EncryptionKey(Integer firstKey, Integer secondKey)
+public record EncryptionKey(int[] keys)
 {
-    public EncryptionKey withFirstKeyOnly()
+    public EncryptionKey reverse()
     {
-        return new EncryptionKey(firstKey, firstKey);
-    }
+        int[] reversedKeys = keys.clone();
 
-    public EncryptionKey withSecondKeyOnly()
-    {
-        return new EncryptionKey(secondKey, secondKey);
-    }
+        int left = 0;
+        int right = reversedKeys.length - 1;
 
-    public int requireFirstKey()
-    {
-        return Objects.requireNonNull(firstKey, "First key is required");
-    }
+        while (left < right)
+        {
+            int temp = reversedKeys[left];
+            reversedKeys[left] = reversedKeys[right];
+            reversedKeys[right] = temp;
 
-    public int requireSecondKey()
-    {
-        return Objects.requireNonNull(secondKey, "Second key is required");
+            left++;
+            right--;
+        }
+
+        return new EncryptionKey(reversedKeys);
     }
 }
