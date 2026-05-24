@@ -10,7 +10,8 @@ public class DoubleEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public int requiredKeys() {
+    public int requiredKeys()
+    {
         return 2;
     }
 

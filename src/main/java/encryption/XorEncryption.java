@@ -3,7 +3,8 @@ package encryption;
 public class XorEncryption implements EncryptionAlgorithm
 {
     @Override
-    public int requiredKeys() {
+    public int requiredKeys()
+    {
         return 1;
     }
 
