@@ -7,7 +7,7 @@ import java.nio.file.Path;
 public class EncryptionApplication
 {
     static final String PROJECT_DIR = "C:\\temp";
-    static final Path ORIGINAL_FILE_PATH = FileUtils.getValidatedFilePath( PROJECT_DIR, "text.txt");
+    static final Path ORIGINAL_FILE_PATH = FileUtils.getValidatedFilePath(PROJECT_DIR, "text.txt");
     static final Path KEY_FILE_PATH = FileUtils.getValidatedFilePath(PROJECT_DIR, "key.txt");
     static final Path TWO_KEYS_FILE_PATH = FileUtils.getValidatedFilePath(PROJECT_DIR, "key.txt");
 
