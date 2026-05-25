@@ -1,5 +1,8 @@
 package file;
 
+import CustomExceptions.FileNotExist;
+import CustomExceptions.FileNotReadable;
+import CustomExceptions.FileNotRegular;
 import encryption.EncryptionKey;
 import lombok.experimental.UtilityClass;
 
@@ -18,17 +21,17 @@ public class FileUtils
 
         if (!Files.exists(path))
         {
-            throw new IllegalArgumentException("File does not exist: " + path);
+            throw new FileNotExist(path);
         }
 
         if (!Files.isRegularFile(path))
         {
-            throw new IllegalArgumentException("Path is not a regular file: " + path);
+            throw new FileNotRegular(path);
         }
 
         if (!Files.isReadable(path))
         {
-            throw new IllegalArgumentException("File is not readable: " + path);
+            throw new FileNotReadable(path);
         }
     }
 
