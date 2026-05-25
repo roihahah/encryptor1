@@ -17,6 +17,7 @@ public class RepeatEncryption implements EncryptionAlgorithm
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         String res = data;
+
         for (int key : encryptionKey.keys())
         {
             int[] duplicatedKey = new int[encryptionKey.keys().length];
@@ -33,6 +34,7 @@ public class RepeatEncryption implements EncryptionAlgorithm
     public String decrypt(String data, EncryptionKey encryptionKey)
     {
         String res = data;
+
         for (int key : encryptionKey.keys())
         {
             int[] duplicatedKey = new int[encryptionKey.keys().length];
@@ -46,7 +48,8 @@ public class RepeatEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public int requiredKeys() {
+    public int requiredKeys()
+    {
         return 1;
     }
 }

@@ -1,8 +1,8 @@
 package file;
 
-import exception.FileNotExist;
-import exception.FileNotReadable;
-import exception.FileNotRegular;
+import exception.FileNotExistException;
+import exception.FileNotReadableException;
+import exception.FileNotRegularException;
 import encryption.EncryptionKey;
 import lombok.experimental.UtilityClass;
 
@@ -21,17 +21,17 @@ public class FileUtils
 
         if (!Files.exists(path))
         {
-            throw new FileNotExist(path);
+            throw new FileNotExistException(path);
         }
 
         if (!Files.isRegularFile(path))
         {
-            throw new FileNotRegular(path);
+            throw new FileNotRegularException(path);
         }
 
         if (!Files.isReadable(path))
         {
-            throw new FileNotReadable(path);
+            throw new FileNotReadableException(path);
         }
     }
 

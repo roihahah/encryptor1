@@ -21,11 +21,12 @@ public class XorEncryption implements EncryptionAlgorithm
     @Override
     public String decrypt(String data, EncryptionKey encryptionKey)
     {
-        return encrypt(data , encryptionKey);
+        return encrypt(data, encryptionKey);
     }
 
     @Override
-    public int requiredKeys() {
+    public int requiredKeys()
+    {
         return 1;
     }
 }

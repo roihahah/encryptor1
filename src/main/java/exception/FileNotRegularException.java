@@ -2,9 +2,9 @@ package exception;
 
 import java.nio.file.Path;
 
-public class FileNotRegular extends IllegalArgumentException
+public class FileNotRegularException extends IllegalArgumentException
 {
-    public FileNotRegular(Path path)
+    public FileNotRegularException(Path path)
     {
         super("Path is not a regular file: " + path);
     }
