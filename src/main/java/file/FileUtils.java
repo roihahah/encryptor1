@@ -58,7 +58,6 @@ public class FileUtils
     public EncryptionKey getKey(Path path)
     {
         List<String> lines = getLinesFromFile(path);
-
         int[] keys = new int[lines.size()];
 
         for (int i = 0; i < lines.size(); i++)
