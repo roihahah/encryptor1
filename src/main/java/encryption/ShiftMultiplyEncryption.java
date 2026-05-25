@@ -6,7 +6,6 @@ public class ShiftMultiplyEncryption implements EncryptionAlgorithm
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         StringBuilder result = new StringBuilder();
-
         for (int key : encryptionKey.keys())
         {
             for (char c : data.toCharArray())
