@@ -1,4 +1,4 @@
-package CustomExceptions;
+package exception;
 
 import java.nio.file.Path;
 

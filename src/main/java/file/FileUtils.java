@@ -1,8 +1,8 @@
 package file;
 
-import CustomExceptions.FileNotExist;
-import CustomExceptions.FileNotReadable;
-import CustomExceptions.FileNotRegular;
+import exception.FileNotExist;
+import exception.FileNotReadable;
+import exception.FileNotRegular;
 import encryption.EncryptionKey;
 import lombok.experimental.UtilityClass;
 

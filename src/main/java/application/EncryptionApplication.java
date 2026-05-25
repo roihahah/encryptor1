@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 import file.FileEncryptor;
 import file.FileUtils;
