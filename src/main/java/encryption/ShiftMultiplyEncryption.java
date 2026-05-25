@@ -3,12 +3,6 @@ package encryption;
 public class ShiftMultiplyEncryption implements EncryptionAlgorithm
 {
     @Override
-    public int requiredKeys()
-    {
-        return 1;
-    }
-
-    @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         StringBuilder result = new StringBuilder();
@@ -37,5 +31,10 @@ public class ShiftMultiplyEncryption implements EncryptionAlgorithm
         }
 
         return result.toString();
+    }
+
+    @Override
+    public int requiredKeys() {
+        return 1;
     }
 }

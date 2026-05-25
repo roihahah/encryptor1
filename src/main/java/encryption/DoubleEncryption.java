@@ -10,12 +10,6 @@ public class DoubleEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public int requiredKeys()
-    {
-        return 2;
-    }
-
-    @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         return encryptionAlgorithm.encrypt(data, encryptionKey);
@@ -25,5 +19,11 @@ public class DoubleEncryption implements EncryptionAlgorithm
     public String decrypt(String data, EncryptionKey encryptionKey)
     {
         return encryptionAlgorithm.decrypt(data, encryptionKey.reverse());
+    }
+
+    @Override
+    public int requiredKeys()
+    {
+        return 2;
     }
 }

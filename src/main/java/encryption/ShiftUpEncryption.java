@@ -3,12 +3,6 @@ package encryption;
 public class ShiftUpEncryption implements EncryptionAlgorithm
 {
     @Override
-    public int requiredKeys()
-    {
-        return 1;
-    }
-
-    @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         StringBuilder result = new StringBuilder();
@@ -38,5 +32,10 @@ public class ShiftUpEncryption implements EncryptionAlgorithm
         }
 
         return result.toString();
+    }
+
+    @Override
+    public int requiredKeys() {
+        return 1;
     }
 }

@@ -12,11 +12,6 @@ public class RepeatEncryption implements EncryptionAlgorithm
     }
 
     @Override
-    public int requiredKeys() {
-        return 1;
-    }
-
-    @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         String res = data;
@@ -46,5 +41,10 @@ public class RepeatEncryption implements EncryptionAlgorithm
         }
 
         return res;
+    }
+
+    @Override
+    public int requiredKeys() {
+        return 1;
     }
 }

@@ -3,12 +3,6 @@ package encryption;
 public class XorEncryption implements EncryptionAlgorithm
 {
     @Override
-    public int requiredKeys()
-    {
-        return 1;
-    }
-
-    @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         StringBuilder result = new StringBuilder();
@@ -28,5 +22,10 @@ public class XorEncryption implements EncryptionAlgorithm
     public String decrypt(String data, EncryptionKey encryptionKey)
     {
         return encrypt(data , encryptionKey);
+    }
+
+    @Override
+    public int requiredKeys() {
+        return 1;
     }
 }
