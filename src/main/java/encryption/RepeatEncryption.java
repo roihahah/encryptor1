@@ -17,7 +17,7 @@ public class RepeatEncryption implements EncryptionAlgorithm
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
         String res = data;
-        for(int key : encryptionKey.keys())
+        for (int key : encryptionKey.keys())
         {
             int[] duplicatedKey = new int[encryptionKey.keys().length];
             Arrays.fill(duplicatedKey, key);
