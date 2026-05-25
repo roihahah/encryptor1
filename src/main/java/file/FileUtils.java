@@ -16,15 +16,18 @@ public class FileUtils
     {
         Objects.requireNonNull(path, "Path cannot be null");
 
-        if (!Files.exists(path)) {
+        if (!Files.exists(path))
+        {
             throw new IllegalArgumentException("File does not exist: " + path);
         }
 
-        if (!Files.isRegularFile(path)) {
+        if (!Files.isRegularFile(path))
+        {
             throw new IllegalArgumentException("Path is not a regular file: " + path);
         }
 
-        if (!Files.isReadable(path)) {
+        if (!Files.isReadable(path))
+        {
             throw new IllegalArgumentException("File is not readable: " + path);
         }
     }
