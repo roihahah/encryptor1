@@ -1,17 +1,18 @@
 package file;
 
 import encryption.EncryptionKey;
+import lombok.experimental.UtilityClass;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
-public final class FileUtils
+@UtilityClass
+public class FileUtils
 {
-    private FileUtils() { }
-
-    public static void checkPath(Path path)
+    public void checkPath(Path path)
     {
         Objects.requireNonNull(path, "Path cannot be null");
 
@@ -28,7 +29,7 @@ public final class FileUtils
         }
     }
 
-    public static Path getValidatedFilePath(String userFolder, String userFile)
+    public Path getValidatedFilePath(String userFolder, String userFile)
     {
         Path path = Path.of(userFolder, userFile);
         checkPath(path);
@@ -36,7 +37,7 @@ public final class FileUtils
         return path;
     }
 
-    public static String getFileData(Path path)
+    public String getFileData(Path path)
     {
         try
         {
@@ -48,7 +49,7 @@ public final class FileUtils
         }
     }
 
-    public static EncryptionKey getKey(Path path)
+    public EncryptionKey getKey(Path path)
     {
         List<String> lines = getLinesFromFile(path);
 
@@ -62,7 +63,7 @@ public final class FileUtils
         return new EncryptionKey(keys);
     }
 
-    private static List<String> getLinesFromFile(Path path)
+    private List<String> getLinesFromFile(Path path)
     {
         try
         {
@@ -74,7 +75,7 @@ public final class FileUtils
         }
     }
 
-    public static void saveData(String data, Path path)
+    public void saveData(String data, Path path)
     {
         try
         {
@@ -88,8 +89,7 @@ public final class FileUtils
         System.out.println("The file written to: " + path);
     }
 
-
-    public static Path buildDecryptedFilePath(Path path)
+    public Path buildDecryptedFilePath(Path path)
     {
         String fileName = path.getFileName().toString();
         String name = fileName.substring(0, fileName.lastIndexOf("_encrypted"));
@@ -99,7 +99,7 @@ public final class FileUtils
         return path.getParent().resolve(decryptedFileName);
     }
 
-    public static Path buildEncryptedFilePath(Path path)
+    public Path buildEncryptedFilePath(Path path)
     {
         String fileName = path.getFileName().toString();
         String name = fileName.substring(0, fileName.lastIndexOf('.'));
