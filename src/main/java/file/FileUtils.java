@@ -12,7 +12,7 @@ import java.util.Objects;
 @UtilityClass
 public class FileUtils
 {
-    public void checkPath(Path path)
+    private void checkPath(Path path)
     {
         Objects.requireNonNull(path, "Path cannot be null");
 
