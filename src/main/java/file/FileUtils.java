@@ -15,6 +15,14 @@ import java.util.Objects;
 @UtilityClass
 public class FileUtils
 {
+    public Path getValidatedFilePath(String userFolder, String userFile)
+    {
+        Path path = Path.of(userFolder, userFile);
+        checkPath(path);
+
+        return path;
+    }
+
     private void checkPath(Path path)
     {
         Objects.requireNonNull(path, "Path cannot be null");
@@ -33,14 +41,6 @@ public class FileUtils
         {
             throw new FileNotReadableException(path);
         }
-    }
-
-    public Path getValidatedFilePath(String userFolder, String userFile)
-    {
-        Path path = Path.of(userFolder, userFile);
-        checkPath(path);
-
-        return path;
     }
 
     public String getFileData(Path path)
