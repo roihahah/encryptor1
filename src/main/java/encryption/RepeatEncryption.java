@@ -1,5 +1,7 @@
 package encryption;
 
+import java.util.Arrays;
+
 public class RepeatEncryption implements EncryptionAlgorithm
 {
     private final int timesToRepeat;
@@ -17,11 +19,11 @@ public class RepeatEncryption implements EncryptionAlgorithm
         String res = data;
         for(int key : encryptionKey.keys())
         {
-            EncryptionKey currentEncryptionKey = new EncryptionKey(new int[] { key });
-            for (int i = 0; i < this.timesToRepeat; i++)
-            {
-                res = encryptionAlgorithm.encrypt(res, currentEncryptionKey);
-            }
+            int[] duplicatedKey = new int[encryptionKey.keys().length];
+            Arrays.fill(duplicatedKey, key);
+
+            EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
+            res = encryptionAlgorithm.encrypt(res, currentEncryptionKey);
         }
 
         return res;
@@ -33,11 +35,11 @@ public class RepeatEncryption implements EncryptionAlgorithm
         String res = data;
         for (int key : encryptionKey.keys())
         {
-            EncryptionKey currentEncryptionKey = new EncryptionKey(new int[] { key });
-            for (int i = 0; i < this.timesToRepeat; i++)
-            {
-                res = encryptionAlgorithm.decrypt(res, currentEncryptionKey);
-            }
+            int[] duplicatedKey = new int[encryptionKey.keys().length];
+            Arrays.fill(duplicatedKey, key);
+
+            EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
+            res = encryptionAlgorithm.decrypt(res, currentEncryptionKey);
         }
 
         return res;
