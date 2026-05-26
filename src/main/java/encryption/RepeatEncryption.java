@@ -18,16 +18,13 @@ public class RepeatEncryption implements EncryptionAlgorithm
     {
         String result = data;
 
-        for (int i = 0; i < this.timesToRepeat; i++)
+        for (int key : encryptionKey.keys())
         {
-            for (int key : encryptionKey.keys())
-            {
-                int[] duplicatedKey = new int[encryptionKey.keys().length];
-                Arrays.fill(duplicatedKey, key);
+            int[] duplicatedKey = new int[this.timesToRepeat];
+            Arrays.fill(duplicatedKey, key);
 
-                EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
-                result = encryptionAlgorithm.encrypt(result, currentEncryptionKey);
-            }
+            EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
+            result = encryptionAlgorithm.encrypt(result, currentEncryptionKey);
         }
 
         return result;
@@ -38,16 +35,13 @@ public class RepeatEncryption implements EncryptionAlgorithm
     {
         String result = data;
 
-        for (int i = 0; i < this.timesToRepeat; i++)
+        for (int key : encryptionKey.keys())
         {
-            for (int key : encryptionKey.keys())
-            {
-                int[] duplicatedKey = new int[encryptionKey.keys().length];
-                Arrays.fill(duplicatedKey, key);
+            int[] duplicatedKey = new int[this.timesToRepeat];
+            Arrays.fill(duplicatedKey, key);
 
-                EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
-                result = encryptionAlgorithm.decrypt(result, currentEncryptionKey);
-            }
+            EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
+            result = encryptionAlgorithm.decrypt(result, currentEncryptionKey);
         }
 
         return result;
