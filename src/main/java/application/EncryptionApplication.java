@@ -22,9 +22,9 @@ public class EncryptionApplication
 
     public static void runAlgorithm(UserInputMock userInputMock)
     {
-        Path outputFile = Path.of(PROJECT_DIR, userInputMock.displayName());
+        Path outputFile = Path.of(PROJECT_DIR, userInputMock.displayName() + ".txt");
         Path encryptedFilePath = FileUtils.buildEncryptedFilePath(outputFile);
-        Path decryptedFilePath = FileUtils.buildDecryptedFilePath(outputFile);
+        Path decryptedFilePath = FileUtils.buildDecryptedFilePath(encryptedFilePath);
 
         FileEncryptor fileEncryptor = new FileEncryptor(userInputMock.algorithm());
         fileEncryptor.encryptFile(ORIGINAL_FILE_PATH, encryptedFilePath, userInputMock.keyFilePath());
