@@ -16,27 +16,7 @@ public class RepeatEncryption implements EncryptionAlgorithm
     @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
-        String res = data;
-
-        for (int i =0; i < this.timesToRepeat; i++)
-        {
-            for (int key : encryptionKey.keys())
-            {
-                int[] duplicatedKey = new int[encryptionKey.keys().length];
-                Arrays.fill(duplicatedKey, key);
-
-                EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
-                res = encryptionAlgorithm.encrypt(res, currentEncryptionKey);
-            }
-        }
-
-        return res;
-    }
-
-    @Override
-    public String decrypt(String data, EncryptionKey encryptionKey)
-    {
-        String res = data;
+        String result = data;
 
         for (int i = 0; i < this.timesToRepeat; i++)
         {
@@ -46,11 +26,31 @@ public class RepeatEncryption implements EncryptionAlgorithm
                 Arrays.fill(duplicatedKey, key);
 
                 EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
-                res = encryptionAlgorithm.decrypt(res, currentEncryptionKey);
+                result = encryptionAlgorithm.encrypt(result, currentEncryptionKey);
             }
         }
 
-        return res;
+        return result;
+    }
+
+    @Override
+    public String decrypt(String data, EncryptionKey encryptionKey)
+    {
+        String result = data;
+
+        for (int i = 0; i < this.timesToRepeat; i++)
+        {
+            for (int key : encryptionKey.keys())
+            {
+                int[] duplicatedKey = new int[encryptionKey.keys().length];
+                Arrays.fill(duplicatedKey, key);
+
+                EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
+                result = encryptionAlgorithm.decrypt(result, currentEncryptionKey);
+            }
+        }
+
+        return result;
     }
 
     @Override
