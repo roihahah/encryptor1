@@ -5,30 +5,48 @@ public class ShiftMultiplyEncryption implements EncryptionAlgorithm
     @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
-        StringBuilder result = new StringBuilder();
+        String result = data;
 
         for (int key : encryptionKey.keys())
         {
-            for (char c : data.toCharArray())
-            {
-                result.append((char) (c * key));
-            }
+            result = multiply(result, key);
         }
 
-        return result.toString();
+        return result;
     }
 
     @Override
     public String decrypt(String data, EncryptionKey encryptionKey)
     {
-        StringBuilder result = new StringBuilder();
+        String result = data;
 
         for (int key : encryptionKey.keys())
         {
-            for (char c : data.toCharArray())
-            {
-                result.append((char) (c / key));
-            }
+            result = divide(result, key);
+        }
+
+        return result;
+    }
+
+    private String multiply(String data, int key)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for (char c : data.toCharArray())
+        {
+            result.append((char) (c * key));
+        }
+
+        return result.toString();
+    }
+
+    private String divide(String data, int key)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for (char c : data.toCharArray())
+        {
+            result.append((char) (c / key));
         }
 
         return result.toString();

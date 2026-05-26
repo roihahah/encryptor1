@@ -5,30 +5,36 @@ public class ShiftUpEncryption implements EncryptionAlgorithm
     @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
-        StringBuilder result = new StringBuilder();
+        String result = data;
 
         for (int key : encryptionKey.keys())
         {
-            for (char c : data.toCharArray())
-            {
-                result.append((char) (c + key));
-            }
+            result = shift(result, key);
         }
 
-        return result.toString();
+        return result;
     }
 
     @Override
     public String decrypt(String data, EncryptionKey encryptionKey)
     {
+        String result = data;
+
+        for (int key : encryptionKey.reverse().keys())
+        {
+            result = shift(result, -key);
+        }
+
+        return result;
+    }
+
+    private String shift(String data, int key)
+    {
         StringBuilder result = new StringBuilder();
 
-        for (int key : encryptionKey.keys())
+        for (char c : data.toCharArray())
         {
-            for (char c : data.toCharArray())
-            {
-                result.append((char) (c - key));
-            }
+            result.append((char) (c + key));
         }
 
         return result.toString();

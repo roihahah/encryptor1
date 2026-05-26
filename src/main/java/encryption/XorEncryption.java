@@ -5,23 +5,32 @@ public class XorEncryption implements EncryptionAlgorithm
     @Override
     public String encrypt(String data, EncryptionKey encryptionKey)
     {
-        StringBuilder result = new StringBuilder();
+        String result = data;
 
         for (int key : encryptionKey.keys())
         {
-            for (char c : data.toCharArray())
-            {
-                result.append((char) (c ^ key));
-            }
+            result = xor(data, key);
         }
 
-        return result.toString();
+        return result;
     }
 
     @Override
     public String decrypt(String data, EncryptionKey encryptionKey)
     {
         return encrypt(data, encryptionKey);
+    }
+
+    public String xor(String data, int key)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for (char c : data.toCharArray())
+        {
+            result.append((char) (c ^ key));
+        }
+
+        return result.toString();
     }
 
     @Override
