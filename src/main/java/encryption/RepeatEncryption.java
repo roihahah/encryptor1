@@ -20,10 +20,7 @@ public class RepeatEncryption implements EncryptionAlgorithm
 
         for (int key : encryptionKey.keys())
         {
-            int[] duplicatedKey = new int[this.timesToRepeat];
-            Arrays.fill(duplicatedKey, key);
-
-            EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
+            EncryptionKey currentEncryptionKey = createDuplicatedKey(key);
             result = encryptionAlgorithm.encrypt(result, currentEncryptionKey);
         }
 
@@ -37,14 +34,19 @@ public class RepeatEncryption implements EncryptionAlgorithm
 
         for (int key : encryptionKey.keys())
         {
-            int[] duplicatedKey = new int[this.timesToRepeat];
-            Arrays.fill(duplicatedKey, key);
-
-            EncryptionKey currentEncryptionKey = new EncryptionKey(duplicatedKey);
+            EncryptionKey currentEncryptionKey = createDuplicatedKey(key);
             result = encryptionAlgorithm.decrypt(result, currentEncryptionKey);
         }
 
         return result;
+    }
+
+    private EncryptionKey createDuplicatedKey(int key)
+    {
+        int[] duplicatedKey = new int[this.timesToRepeat];
+        Arrays.fill(duplicatedKey, key);
+
+        return new EncryptionKey(duplicatedKey);
     }
 
     @Override
