@@ -1,4 +1,4 @@
-import Application.EncryptionApplication;
+import application.EncryptionApplication;
 
 public class Main
 {
